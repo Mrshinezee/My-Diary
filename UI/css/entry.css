@@ -80,11 +80,13 @@
     height: 500px;
    }
    #highlight{
-    font-size:12px;
-    font-weight: bold;
-    color: #4484CE;
-    margin: 6px;
+    display: block;
+    padding: 10px auto 10px auto;
+    margin-top: 20px;
+    margin-left: 60px;
     font-family: Spirax;
+    font-size:25px;
+    color: #4484CE;
    }
    .options{
     display: block;
