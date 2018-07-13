@@ -132,6 +132,15 @@
     background-color:#ffffff;
     margin: 5px;
   }
+  #counter{
+      width:60%;
+      height: 100px;
+      margin: auto;
+      color: #f28e53;
+      border: 1px solid #f28e53;
+      padding: auto;
+      text-align: center;
+  }
    #motto,#no_account{
        font-family: Arial, Helvetica, sans-serif;
        color: white;
@@ -224,6 +233,12 @@ textarea{
     width:65%;
     height: 600px;
    }
+   #counter{
+    width:80%;
+    height: 90px;
+    font-size:15px;
+   }
+
    #highlight{
     font-size:12px;
     font-weight: bold;
