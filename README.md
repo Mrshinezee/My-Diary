@@ -2,7 +2,7 @@
 # Description
   MyDiary is an online journal where users can pen down their thoughts and feelings.
 # badges 
-  https://travis-ci.org/Mrshinezee/My-Diary.svg?branch=develop
+  [![Build Status](https://travis-ci.org/Mrshinezee/My-Diary.svg?branch=develop)](https://travis-ci.org/Mrshinezee/My-Diary)
   
 # Users
     Users can create an account and log in.
