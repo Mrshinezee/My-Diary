@@ -1,0 +1,50 @@
+{
+  "name": "my-diary",
+  "version": "1.0.0",
+  "description": "MyDiary is an online journal where users can pen down their thoughts and feelings.",
+  "main": "app.js",
+  "scripts": {
+    "test": "nyc --reporter=text --reporter=lcov mocha --require babel-core/register ./server/test  --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "start": "babel-node app.js --exec --presets es2015"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "cookie-parser": "^1.4.3",
+    "coveralls": "^3.0.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "express": "^4.16.3",
+    "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^1.18.3",
+    "nyc": "^12.0.2",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "mocha": "^5.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mrshinezee/My-Diary.git"
+  },
+  "author": "Ijeomah Arinze Collins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mrshinezee/My-Diary/issues"
+  },
+  "homepage": "https://github.com/Mrshinezee/My-Diary#readme"
+}
