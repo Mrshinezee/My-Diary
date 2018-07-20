@@ -57,5 +57,18 @@ class myDiaryController {
     }
     return result;
   }
+
+  static getEntryById(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const entry = myDiary.filter(diary => diary.id === id)[0];
+    if (!entry) {
+      res.status(404).json({ message: 'Entry was not found' });
+    } else {
+      res.status(201).json({
+        success: 'success',
+        result: entry,
+      });
+    }
+  }
 }
 export default myDiaryController;
