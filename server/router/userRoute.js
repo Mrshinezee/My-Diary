@@ -5,6 +5,7 @@ import UserValidation from '../validation/user';
 const userRoute = (app) => {
   app.post('/api/v1/entries', UserValidation.validateEntry, myDiaryController.createEntry);
   app.get('/api/v1/entries', myDiaryController.getAllEntries);
+  app.get('/api/v1/entries/:id', myDiaryController.getEntryById);
 };
 
 export default userRoute;
