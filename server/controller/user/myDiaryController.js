@@ -70,5 +70,16 @@ class myDiaryController {
       });
     }
   }
+
+  static editEntry(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const entry = myDiary.filter(diary => diary.id === id)[0];
+    entry.Title = req.body.Title;
+    entry.entry = req.body.entry;
+    res.status(201).json({
+      success: 'successfully edited',
+      result: myDiary,
+    });
+  }
 }
 export default myDiaryController;
