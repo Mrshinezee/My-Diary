@@ -7,6 +7,7 @@ const userRoute = (app) => {
   app.get('/api/v1/entries', myDiaryController.getAllEntries);
   app.get('/api/v1/entries/:id', myDiaryController.getEntryById);
   app.put('/api/v1/entries/:id', myDiaryController.editEntry);
+  app.delete('/api/v1/entries/:id', myDiaryController.deleteEntry);
 };
 
 export default userRoute;
