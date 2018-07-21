@@ -10,6 +10,11 @@ const myDiary = [
     Title: '      ',
     entry: 'Everything happened with millsecond, beautiful girl passsing by with alovely smile',
   },
+  {
+    id: 4,
+    Title: 'The new work',
+    entry: 'Everything happened with millsecond, beautiful girl passsing by with alovely smile',
+  },
 ];
 
 class myDiaryController {
@@ -78,6 +83,19 @@ class myDiaryController {
     entry.entry = req.body.entry;
     res.status(201).json({
       success: 'successfully edited',
+      result: myDiary,
+    });
+  }
+
+  static deleteEntry(req, res) {
+    const id = parseInt(req.params.id, 10);
+    const entry = myDiary.filter(diary => diary.id === id)[0];
+    const index = myDiary.indexOf(entry);
+    if (index !== -1) {
+      myDiary.splice(index, 1);
+    }
+    res.status(201).json({
+      success: 'successfully deleted',
       result: myDiary,
     });
   }
