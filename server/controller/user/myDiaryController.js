@@ -15,6 +15,11 @@ const myDiary = [
     Title: 'The new work',
     entry: 'Everything happened with millsecond, beautiful girl passsing by with alovely smile',
   },
+  {
+    id: 5,
+    Title: 'the beautiful ones',
+    entry: 'Is a fact that the beautiful ones are not yet born',
+  },
 ];
 
 class myDiaryController {

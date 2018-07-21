@@ -4,7 +4,7 @@
   "description": "MyDiary is an online journal where users can pen down their thoughts and feelings.",
   "main": "app.js",
   "scripts": {
-    "test": "set NODE_ENV=test && nyc --reporter=text --reporter=lcov mocha --require babel-core/register ./server/test  --exit",
+    "test": "nyc --reporter=text --reporter=lcov mocha --require babel-core/register ./server/test  --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "babel-node app.js --exec --presets es2015"
   },
