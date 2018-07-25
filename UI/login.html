@@ -6,9 +6,29 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" type="image/png" href="http://res.cloudinary.com/dowmiccxo/image/upload/v1531255458/fav.png"/>
   <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/nav.css">
   <title>Login</title>
 </head>
   <body>
+      <div class="menu-links">
+          <div id="menu-links-left">
+            <span><a href="index.html">MY-DIARY</a></span>
+          </div>
+    
+          <div class="menu-icon">
+            <label for="menu-check">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+          </div>
+    
+          <input type="checkbox" id="menu-check">
+          <div class="menu-links-right">
+            <a href="sign-up.html">Sign Up</a>
+            <a href="login.html">Login</a>
+          </div>      
+        </div>
  
     <div id="main">
         <div class="centring-div">
@@ -22,7 +42,7 @@
         </div>
 
         <div id="login">
-            <form action="entry.html" method="post"> 
+            <form action="entry.html" method="get"> 
                 <div class="centring-div">
                     <h4>LOG IN</h4>
                 </div>
@@ -35,7 +55,7 @@
               </p>
               <p id="password-alert" class="alert-class"></p>
               <p class="sign-up"> 
-                    <input type="submit" id="loginUser"/> 
+                    <input type="submit" id="loginUser" onchange="login()"/> 
               </p>
             </form>
         </div>  
@@ -46,6 +66,7 @@
             </div>
           </div>
       </div>
+      <script src="js/login.js"></script>
     <footer>
             <p>My-Diary, Copyright &copy; 2018 </p>
      </footer>

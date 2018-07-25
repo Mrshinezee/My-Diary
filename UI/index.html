@@ -6,21 +6,34 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" type="image/png" href="http://res.cloudinary.com/dowmiccxo/image/upload/v1531255458/fav.png"/>
   <!-- CSS -->
+  <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/home.css">
   <title>My-Diary | Welcome</title>
 </head>
   <body>
-    <div class="menu-links">
-      <div class="menu-links-right">
-          <span><a href="sign-up.html">Sign Up</a></span>
-          <span><a href="login.html">Login</a></span>
-      </div>
-    </div>
+        <div class="menu-links">
+          <div id="menu-links-left">
+            <span><a href="index.html">MY-DIARY</a></span>
+          </div>
+    
+          <div class="menu-icon">
+            <label for="menu-check">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+          </div>
+    
+          <input type="checkbox" id="menu-check">
+          <div class="menu-links-right">
+            <a href="sign-up.html">Sign Up</a>
+            <a href="login.html">Login</a>
+          </div>      
+        </div>
     
       <header id="header">
         <div class="container">
           <div id="topic">
-            <div id="logo"></div>
           </div>
           <h5>Pen down your thoughts and feelings</h5>
           <button class="btn-signup" onclick="login();">Get Started</button>

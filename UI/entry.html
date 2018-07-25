@@ -5,53 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" type="image/png" href="http://res.cloudinary.com/dowmiccxo/image/upload/v1531255458/fav.png"/>
+  <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/entry.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
   <title>New Entry</title>
 </head>
   <body>
-        <div class="menu-links">
-                <div class="menu-links-right">
-                    <span><a href="setting.html">Shine</a></span>
-                    <span><a href="">Logout</a></span>
-                </div>
+    <div class="menu-links">
+        <div id="menu-links-left">
+          <span><a href="index.html">MY-DIARY</a></span>
         </div>
-
-    <div id="main">
-               <div id="entryHeader">
-                       <div id="topic">
-                            <div id="logo"></div>
-                            <h1 id="logo_sub">NEW ENTRY</h1>
+  
+        <div class="menu-icon">
+          <label for="menu-check">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+        </div>
+  
+        <input type="checkbox" id="menu-check">
+        <div class="menu-links-right">
+          <a href="allEntry.html">Entries</a>
+          <a href="setting.html">Shine</a>
+          <a href="index.html">Logout</a>
+        </div>      
+      </div>
+       
+       <div id="main">
+                <div id="entryHeader">
+                   <div class="logo_sub" > NEW ENTRY</div>
+                      </div>
                         </div>
-               </div>
-            <div id="entryBody">
-               <div id="sidebar">
-                       <div id="sidebar-menu">
-                          <span id="highlight">New Entry</span>
-                          <span class="options"> Entries</span>
-                       </div>
-               </div>
                 <div id="dailyEntry">
-                   
                     <form>
                         <p id="today">
                                <span>Thursday,  </span><span>12-06-2018</span>
                         </p>
-                        
                         <p>
                                 <span><label for="topic">Title</label></span>
                                 <input type="text" id="topic" name="topic" placeholder="Entry Tiltle">
                         </p>
-                        
                         <p>
                                <span><label for="content">Entry</label></span> 
                                 <textarea name="content" id="content" cols="30" rows="10"></textarea>
                         </p>
                             <button type="submit" name="save" id="submitEntry">save</button>
-                        
                     </form>
-
                 </div>
-              </div>  
         </div>    
             
     <footer>
