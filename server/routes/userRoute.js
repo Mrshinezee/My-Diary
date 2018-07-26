@@ -1,4 +1,4 @@
-// import authUsersController from '../controller/authUsersController';
+import authUsersController from '../controllers/authUsersController';
 import myDiaryController from '../controllers/myDiaryController';
 import UserValidation from '../helpers/user';
 
@@ -8,6 +8,7 @@ const userRoute = (app) => {
   app.get('/api/v1/entries/:id', myDiaryController.getEntryById);
   app.put('/api/v1/entries/:id', myDiaryController.editEntry);
   app.delete('/api/v1/entries/:id', myDiaryController.deleteEntry);
+  app.post('/api/v1/auth/signup', UserValidation.validateRegistrationEntry, authUsersController.registerUser);
 };
 
 export default userRoute;
