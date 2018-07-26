@@ -5,122 +5,56 @@
     padding: 0 ;
     border: 0 none;
    }
-   body,html{
+   body{
        height: 100%;
        background-color: #D9D9D9;
    }
-   .menu-links{
-    background: #D9D9D9;
-    width: 100%;
-    /* position:fixed; */
-  }
-  .menu-links-right {
-    float: right;
-  }
-  .menu-links-right span{
-    font-family:Monoton;
-    padding: 10px 20px;
-  }
-  .menu-links-right a{
-    text-decoration:none;
-    color: #4484CE;
-    font-size: 18px;
-  }
-  .menu-links-right a:hover{
-    text-decoration:none;
-    color: #F19F4D;
-    font-size: 20px;
-  }
-  .menu-links::after{
-    clear: both;
-  }
+  
    #main{
        margin:auto;
        overflow:hidden;
-       width:90%;
-       width: 90%;
+       width:100%;
        background-color: #D9D9D9;
    }
-   /*#entryHeader{*/
-       /*border: 1px solid black;*/
-       /*text-decoration: underline;*/
-       /*color:#5fd1a0;*/
-   /*}*/
-   #logo_sub{
-       font-size: 40px;
-       margin: auto;
-       width: 250px;
-       height: 70px;
-       padding: auto;
-       text-align: center;   /*padding: 0 42% 0 42%;*/
-    color: #4484CE;
-
-  }
-   #logo{
-    background: url(http://res.cloudinary.com/dowmiccxo/image/upload/c_mfit,h_56,w_105/v1531255459/My-diary.png) no-repeat; 
-    background-size:100%;
-    width: 250px;
-    height: 60px;
+   
+   .logo_sub{
+    font-size: 40px;
     margin: auto;
-
+    width: 250px;
+    height: 70px;
+    padding: auto;
+    text-align: center;   
+    color: #4484CE;
+   }
+  #entryHeader{
+    margin-top: 100px;
   }
-   #entryBody {
-       width: 100%;
-   }
-   #sidebar{
-        background-color: #D9D9D9;
-        width:25%;
-        height: 500px;
-        float: left;
-         border-right: 3px solid  #f28e53
-   }
-   #sidebar-menu{
+   input[type="text"] {
+    background:transparent;
+    padding:5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color:rgb(15, 6, 6);
+    font-size:1em;
+    height:20px;
+    outline:none;
     width:80%;
-    padding: 10px 10px 10px auto;
-    height: 500px;
-   }
-   #highlight{
-    display: block;
-    padding: 10px auto 10px auto;
-    margin-top: 20px;
-    margin-left: 60px;
-    font-family: Spirax;
-    font-size:25px;
-    color: #4484CE;
-   }
-   .options{
-    display: block;
-    padding: 10px auto 10px auto;
-    margin-top: 20px;
-    margin-left: 60px;
-    font-size: 15px;
-    font-family: Spirax;
-    color: #f28e53;
-   }
-
-   .options:hover{
-    font-size: 25px;
-    color: #4484CE;
-   }
+  }
 
    #dailyEntry {
-    width:72%;
-    background: url(http://res.cloudinary.com/dowmiccxo/image/upload/v1531311983/pen-notebook.png) no-repeat;
-    background-size: 100%;
-    background-size:cover;
-    float: right;
-    padding : auto;
-    height: 600px;
+    background-color: white;
+    padding: 10px;
+    margin: auto;
+    height: 60%; 
+    left: 30%;
+    overflow: auto;
+    padding: 20px,20px;
+    top: 0;
+    width: 40%; 
+    border: 1px solid blue;
+    margin-bottom: 5%;
    }
 
-   #entryBody::after{
-    clear: both;
-  }
-  
-   #dailyEntry form{
-    width: 90%;
-    background-color:#ffffff;
-  }
    #motto,#no_account{
        font-family: Arial, Helvetica, sans-serif;
        color: white;
@@ -133,30 +67,32 @@
    }
   
    label, #today {
-       margin-right: 15%;
        color: #4484CE;
        padding: 10px;
        box-sizing: border-box;
+       font-size: 20px;
    }
-   input[type=text] {
-    width: 60%;
-    padding: 12px 20px;
-    margin: 0 auto 0 auto;
-    font-size: 20px;
-    box-sizing: border-box;
-    background: transparent;
-    border: 1px solid white;
-    
+   input[type="submit"] {
+    background: #95f0d8;
+    width:100%;
+    padding: 10px;
+    border: 1px solid #95f0d8;
+    border-radius: 8px;
+    text-align: center;
+}
+
+input[type="submit"]:hover {
+    background: #34946a;
 }
 textarea{
     vertical-align:top;
-    width: 60%;
+    width: 80%;
+    height: 100%;
     padding: 12px 20px;
     margin: 0 auto 0 auto;
     font-size: 20px;
     box-sizing: border-box;
     background: transparent;
-    border: 1px solid  white;
 }
    button[type="submit"] {
        background: #4484CE;
@@ -188,35 +124,15 @@ textarea{
        color: #dff;
    }
    @media(max-width: 550px) {
-    #sidebar{
-        width:30%;
-        height: 500px;
-        padding:0;
-         border-right: 1px solid  #f28e53
-   }
+    #logo{
+        background: url(http://res.cloudinary.com/dowmiccxo/image/upload/c_mfit,h_26,w_53/v1531255459/My-diary.png) no-repeat; 
+        background-size:100%;
+        width: 180px;
+        height: 70px;
+      }   
    #dailyEntry {
     width:65%;
     height: 600px;
-   }
-   #highlight{
-    font-size:12px;
-    font-weight: bold;
-    color: #4484CE;
-    margin: 6px;
-    font-family: Spirax;
-   }
-   .options{
-    font-size:10px;
-    font-weight: bold;
-    margin: 6px;
-    font-family: Spirax;
-    color: #f28e53;
-  }
-  .options:hover{
-    font-size: 12px;
-    font-weight: bold;
-    color: #4484CE;
-    transition: 1ms
    }
   #dailyEntry form{
     width: 90%;
@@ -237,7 +153,7 @@ button[type="submit"] {
     margin: 10px 30% ;
 }
     textarea{
-        width: 90%;
+        width: 98%;
     }  
     
 }

@@ -21,59 +21,20 @@ html, body {
   margin-top:200px;
 }
 
-.container #logo{
-  background: url(http://res.cloudinary.com/dowmiccxo/image/upload/c_mfit,h_56,w_105/v1531255459/My-diary.png) no-repeat; 
-  background-size:100%;
-  width: 250px;
-  height: 70px;
-  margin: auto;
-}
-
-
 .centre-div {
   text-align: center;
 }
-
-
 .active {
   border:1px solid #fff;
   border-radius:5px;
   padding:10px 20px
 }
-
-.menu-links{
-  background-color: #f28e53;
-  width: 100%;
-  /* position:fixed; */
-}
-.menu-links-right {
-  float: right;
-}
-.menu-links-right span{
-  font-family:Monoton;
-  padding: 10px 20px;
-}
-.menu-links-right a{
-  text-decoration:none;
-  color: #4484CE;
-  font-size: 18px;
-}
-.menu-links-right a:hover{
-  text-decoration:none;
-  color: #F19F4D;
-  font-size: 20px;
-  transition:0.5;
-}
-.menu-links::after{
-  clear: both;
-}
-
 #header {
+  padding-top: 70px;
   clear:both;
   background:url(http://res.cloudinary.com/dowmiccxo/image/upload/v1531260429/love.jpg);
   background-position:center;
   background-size:cover;
-  /* border-bottom:5px solid #FF8C00; */
   color:#fff;
   height:600px;
   text-align:center

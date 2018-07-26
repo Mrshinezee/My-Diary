@@ -5,33 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" type="image/png" href="http://res.cloudinary.com/dowmiccxo/image/upload/v1531255458/fav.png"/>
+  <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/setting.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
   <title>Settings</title>
 </head>
   <body>
         <div class="menu-links">
-                <div class="menu-links-right">
-                    <span><a href="sign-up.html">Home</a></span>
-                    <span><a href="login.html">Logout</a></span>
+                <div id="menu-links-left">
+                  <span><a href="index.html">MY-DIARY</a></span>
                 </div>
-        </div>
+          
+                <div class="menu-icon">
+                  <label for="menu-check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </label>
+                </div>
+          
+                <input type="checkbox" id="menu-check">
+                <div class="menu-links-right">
+                  <a href="entry.html"><i class="fa fa-plus"></i>Create Entry</a>
+                  <a href="allEntry.html">Entries</a>
+                  <a href="index.html">Logout</a>
+                </div>      
+              </div>
 
         <div id="main">
-                <div id="entryHeader">
-                        <div id="topic">
-                             <div id="logo"></div>
-                             <h1 id="logo_sub">ACCOUNT</h1>
-                         </div>
-                </div>
+                
              <div id="entryBody">
-                <div id="sidebar">
-                        <div id="sidebar-menu">
-                           <span id="highlight">Setting</span>
-                           <span class="options"> Entries</span>
-                        </div>
-                </div>
                  <div id="dailyEntry">
-                 <form id="account">
+                 <form class="account">
                         <p >
                         <span ><h1 class="accountFormHeader">Account Settings</h1></span>
                          </p>
@@ -49,7 +55,7 @@
                           </p>
                    </form>
 
-                    <form id="account">
+                    <form class="account">
                         <p >
                                 <span> <h1  class="accountFormHeader">Account Information</h1></span>
                         </p>
@@ -66,7 +72,7 @@
                              <span><label for="lastname">Lastname</label></span>
                              <input type="text" id="lastname" name="lastname"  value="Zee" >
                         </p>
-                        <button type="submit" name="save" id="updateAccount">save</button>
+                        <button type="submit" name="save" id="updateAccount">Update</button>
                     </form>
 
                     

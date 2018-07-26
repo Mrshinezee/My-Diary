@@ -8,81 +8,56 @@ body {
        height: 100%;
        background-color: #D9D9D9;
    }
-.menu-links{
-    background: #D9D9D9;
-    width: 100%;
-    /* position:fixed; */
-}
-.menu-links-right {
-    float: right;
-}
-.menu-links-right span{
-    font-family:Monoton;
-    padding: 10px 20px;
-}
-.menu-links-right a{
-    text-decoration:none;
-    color: #4484CE;
-    font-size: 18px;
-}
-.menu-links-right a:hover{
-    text-decoration:none;
-    color: #F19F4D;
-    font-size: 20px;
-}
-.menu-links::after{
-    clear: both;
-}
-
-#logo_sub{
+   
+.logo_sub{
     font-size: 40px;
     margin: auto;
     width: 250px;
     height: 70px;
     padding: auto;
-    text-align: center;   /*padding: 0 42% 0 42%;*/
+    text-align: center;   
     color: #4484CE;
-
 }
-#logo{
-    background: url(http://res.cloudinary.com/dowmiccxo/image/upload/c_mfit,h_56,w_105/v1531255459/My-diary.png) no-repeat;
-    background-size:100%;
-    width: 250px;
-    height: 60px;
-    margin: auto;
-
+#entryHeader{
+    margin-top: 100px;
 }
-
    #main{
        margin:auto;
        overflow:hidden;
-       width:90%;
-       /* border: 1px solid #111139; */
        width: 90%;
        background-color: #D9D9D9;
    }
    table {
-    border-collapse: collapse;
-    /* border: 1px solid white; */
+    border:1px solid #ccc;
+    border-collapse:collapse;
+    margin:0;
+    padding:0;
+    table-layout:fixed;
+    width:100%; border: 1px solid white;
 
    }
-   /* table, th, td {
-    border: 1px solid #95f0d8;
-    } */
-    th {
-        font-size: 30px;
-        height: 25px;
-        text-align: left;
-        color: #4484CE;
-        border-bottom: 1px solid #F19F4D;
-        
-    }
-    td{
-        height: 35px;
-        vertical-align: bottom;
-        color: black;
-        border-bottom: 1px solid #F19F4D;
-    }
+   table tr:nth-child(even) {
+    background-color:#fff;
+  }
+  table tr:nth-child(odd) {
+    background-color:#ccc;
+  }
+    table th,table td {
+        border:1px solid #ddd;
+        padding:.625em;
+        text-align:center;
+      }
+      table th:first-child, table th:last-child{
+          width: 25%;
+      }
+      
+      table th {
+        background-color:#4484CE;
+        color:#fff;
+        font-size:.85em;
+        letter-spacing:.1em;
+        text-transform:uppercase;
+      }
 
    #main h1{
        font-family: Arial, Helvetica, sans-serif;
@@ -136,14 +111,38 @@ body {
        font-size:1em;
        height:20px;
        outline:none;
-       width:100%;
+       width:80%;
      }
    input[type="password"]:hover,input[type="email"]:hover {
        border: 1px solid #5fd1a0;
        cursor:pointer;
        transition:0;
    }
-   
+   textarea{
+    vertical-align:top;
+    width: 80%;
+    height: 100%;
+    padding: 12px 20px;
+    margin: 0 auto 0 auto;
+    font-size: 20px;
+    box-sizing: border-box;
+    background: transparent;
+}
+   button[type="submit"] {
+       background: #4484CE;
+       width:10%;
+       padding: auto;
+       font-size: 20px;
+       margin: 10px 40% ;
+       border: 1px solid #4484CE;
+       border-radius: 3px;
+       text-align: center;
+   }
+   label {
+    color: #4484CE;
+    padding: 15px;
+    font-size: 20px;
+}
    input[type="submit"] {
        background: #95f0d8;
        width:100%;
@@ -157,6 +156,85 @@ body {
        background: #34946a;
    }
 
+   .editDiary{
+    background-color: white;
+    padding: 10px;
+    margin-top: 8%;
+    height: 60%; 
+    left: 20%;
+    overflow: auto;
+    position: fixed;
+    padding: 20px,20px;
+    top: 0;
+    width: 60%; 
+    border: 1px solid blue; 
+  }
+  .modalBody {
+    background-color: white;
+    padding: 10px;
+    margin-top: 8%;
+    height: 60%; 
+    left: 30%;
+    overflow: auto;
+    position: fixed;
+    padding: 20px,20px;
+    top: 0;
+    width: 40%; 
+    z-index: 100; 
+    border: 1px solid blue; 
+  }
+     #edit-modal, #modalcontainer, #delete-modal,#view-modal {
+        background-color: rgba(0,0,0,0.5);
+    display: none;
+    height: 100%; 
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    padding-top: 100px;
+    top: 0;
+    width: 100%; 
+    z-index: 100; 
+     }
+
+  .modal-container {
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    height: 100%; 
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    padding-top: 100px;
+    top: 0;
+    width: 100%; 
+    z-index: 100;  
+  }
+  
+  #close, .closeUpdate {
+    background: #882222;
+    border: none;
+    float: right;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    padding: 10px 20px;
+    margin-top: 20px; 
+    margin-right: 150px;
+  }
+  
+  #proceed,.btn-back {
+    background: #007bff;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    margin-left: 150px;
+    margin-top: 20px;
+    outline: none;
+    padding: 10px 20px; 
+  }
+
 footer {
     position: fixed;
     left: 0;
@@ -165,7 +243,7 @@ footer {
     height: 5%;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color:#4484CE;
+    background-color: #4484CE;
     text-align: center;
     color: #dff;
 }
@@ -191,14 +269,73 @@ footer {
           background-size: 100%;
        }
      .edit{
-          height: 15px;
+          height: 15px;;
           width: 15px;
           background: url(http://res.cloudinary.com/dowmiccxo/image/upload/v1531315940/edit.png) no-repeat;
           background-size: 100%;
        }
      .fontDate{
          font-size: 10px;
-     }  
-   
-    
-}
+     } 
+     table {
+        border: 0;
+      }
+      
+      table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+      
+      table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+      }
+      
+      table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+      }
+      
+      table td::before {
+        content: attr(name);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      
+      table td:last-child {
+        border-bottom: 0;
+      }
+      .editDiary {
+        height: 80%; 
+        width: 99%; 
+        top: 10%;
+        left: 0;
+      }
+    .modalBody {  
+        height: 50%; 
+        width: 98%; 
+        top: 10%;
+        left: 0; 
+      }
+      #close, .closeUpdate {
+        margin-right: 20px;
+      }
+      
+      #proceed,.btn-back {
+        margin-left: 10px;
+      } 
+    } 
+
+
+/* Modal Message */
+
