@@ -13,8 +13,7 @@ class authUsersController {
   }
 
   static registerUser(request, response) {
-    const userPassword = request.body.password;
-    const hashPassword = authUsersController.hashpassword(userPassword);
+    const hashPassword = authUsersController.hashpassword(request.body.password);
     const collection = {
       firstName: request.body.firstName,
       lastName: request.body.lastName,
