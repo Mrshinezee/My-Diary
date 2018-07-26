@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import winston from 'winston';
-import router from './server/router';
+import router from './server/routes';
 
 const app = express();
 const port = process.env.PORT || 4500;

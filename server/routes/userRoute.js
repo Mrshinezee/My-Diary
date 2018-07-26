@@ -1,6 +1,6 @@
-// import authUsersController from '../controller/user/authUsersController';
-import myDiaryController from '../controller/user/myDiaryController';
-import UserValidation from '../validation/user';
+// import authUsersController from '../controller/authUsersController';
+import myDiaryController from '../controllers/myDiaryController';
+import UserValidation from '../helpers/user';
 
 const userRoute = (app) => {
   app.post('/api/v1/entries', UserValidation.validateEntry, myDiaryController.createEntry);
