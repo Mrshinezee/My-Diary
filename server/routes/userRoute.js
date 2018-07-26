@@ -1,5 +1,5 @@
-// import authUsersController from '../controller/user/authUsersController';
-import myDiaryController from '../controllers/user/myDiaryController';
+// import authUsersController from '../controller/authUsersController';
+import myDiaryController from '../controllers/myDiaryController';
 import UserValidation from '../helpers/user';
 
 const userRoute = (app) => {
