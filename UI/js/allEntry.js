@@ -63,6 +63,7 @@ const modalbuilder = () => {
   viewModal.style.display = 'block';
   window.addEventListener('click', (event) => {
     if (event.target === viewModal) {
+      viewModal.style.display = 'none';
       viewModal.innerHTML = '';
     }
   });
