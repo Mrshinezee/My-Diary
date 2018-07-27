@@ -1,4 +1,5 @@
 import validator from 'validator';
+
 class UserValidation {
   static validateEntry(request, response, next) {
     const required = ['entry'];
@@ -31,6 +32,35 @@ class UserValidation {
         errors[required[i]] = `please provide ${required[i]}`;
       }
     }
+    if (collection.email) {
+      if ((validator.isEmail(collection.email) === false)) {
+        isValid = false;
+        errors.email = 'please provide a valid email address';
+      }
+    }
+    // errors.firstName = UserValidation.lengthchecker(String(collection.firstName));
+    // errors.lastName = UserValidation.lengthchecker(String(collection.lastName));
+    if (collection.password) {
+      const result = UserValidation.checkPassword(String(collection.password));
+      errors.password = result;
+      if (result) {
+        isValid = false;
+      }
+    }
+    if (collection.firstName) {
+      const result = UserValidation.checkFirstName(String(collection.firstName));
+      errors.firstName = result;
+      if (result) {
+        isValid = false;
+      }
+    }
+    if (collection.lastName) {
+      const result = UserValidation.checkLastName(String(collection.lastName));
+      errors.lastName = result;
+      if (result) {
+        isValid = false;
+      }
+    }
     if (isValid) {
       return next();
     }
@@ -40,30 +70,40 @@ class UserValidation {
     });
   }
 
-  static checkLength(request, response, next) {
-    const { password, firstName, lastName } = request.body;
-    let isValid = true;
-    const errors = {};
+  static checkFirstName(param) {
+    const firstName = param.trim();
+    if (validator.isEmpty(firstName)) {
+      return 'Your firstName cannot be empty';
+    }
 
-    if (lastName && !(validator.isLength(lastName, { min: 1, max: 15 }))) {
-      isValid = false;
-      errors.lastName = 'The length of your last name should be between 1 and 10';
+    if (firstName.length <= 2) {
+      return 'Your firstName  should be greater than2 charaters ';
     }
-    if (firstName && !(validator.isLength(firstName, { min: 1, max: 15 }))) {
-      isValid = false;
-      errors.firstName = 'The length of your first name should be between 1 and 10';
+    return undefined;
+  }
+
+  static checkLastName(param) {
+    const lastName = param.trim();
+    if (validator.isEmpty(lastName)) {
+      return 'Your lastName cannot be empty';
     }
-    if (password && !(validator.isLength(password, { min: 6, max: 15 }))) {
-      isValid = false;
-      errors.password = 'your Password length should be between 6 and 15';
+
+    if (lastName.length <= 2) {
+      return 'Your lastName should be greater than 2 charaters ';
     }
-    if (isValid) {
-      return next();
+    return undefined;
+  }
+
+  static checkPassword(param) {
+    const password = param.trim();
+    if (validator.isEmpty(password)) {
+      return 'Your password cannot be empty';
     }
-    return response.status(400).json({
-      success: false,
-      errors,
-    });
+
+    if (password.length <= 6) {
+      return 'Your Password length should be greater 6 charaters ';
+    }
+    return undefined;
   }
 }
 export default UserValidation;
