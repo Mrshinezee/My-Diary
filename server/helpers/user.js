@@ -2,7 +2,7 @@ import validator from 'validator';
 
 class UserValidation {
   static validateEntry(request, response, next) {
-    const required = ['entry'];
+    const required = ['userId', 'entrytitle', 'entrycontent'];
     const collection = request.body;
     let isValid = true;
     const errors = {};
@@ -10,6 +10,39 @@ class UserValidation {
       if (!collection[required[i]]) {
         isValid = false;
         errors[required[i]] = `please provide ${required[i]}`;
+      }
+    }
+    if (isValid) {
+      return next();
+    }
+    return response.status(404).json({
+      success: false,
+      errors,
+    });
+  }
+
+  static validateLogin(request, response, next) {
+    const required = ['email', 'password'];
+    const collection = request.body;
+    let isValid = true;
+    const errors = {};
+    for (let i = 0; i < required.length; i += 1) {
+      if (!collection[required[i]]) {
+        isValid = false;
+        errors[required[i]] = `please provide ${required[i]}`;
+      }
+    }
+    if (collection.email) {
+      if ((validator.isEmail(collection.email) === false)) {
+        isValid = false;
+        errors.email = 'please provide a valid email address';
+      }
+    }
+    if (collection.password) {
+      const result = UserValidation.checkPassword(String(collection.password));
+      errors.password = result;
+      if (result) {
+        isValid = false;
       }
     }
     if (isValid) {
@@ -38,8 +71,6 @@ class UserValidation {
         errors.email = 'please provide a valid email address';
       }
     }
-    // errors.firstName = UserValidation.lengthchecker(String(collection.firstName));
-    // errors.lastName = UserValidation.lengthchecker(String(collection.lastName));
     if (collection.password) {
       const result = UserValidation.checkPassword(String(collection.password));
       errors.password = result;
@@ -77,10 +108,11 @@ class UserValidation {
     }
 
     if (firstName.length <= 2) {
-      return 'Your firstName  should be greater than2 charaters ';
+      return 'Your firstName  should be greater than 2 charaters ';
     }
     return undefined;
   }
+
 
   static checkLastName(param) {
     const lastName = param.trim();
@@ -89,10 +121,11 @@ class UserValidation {
     }
 
     if (lastName.length <= 2) {
-      return 'Your lastName should be greater than 2 charaters ';
+      return 'Your lastName should be greater than 2 charaters';
     }
     return undefined;
   }
+
 
   static checkPassword(param) {
     const password = param.trim();
@@ -101,7 +134,7 @@ class UserValidation {
     }
 
     if (password.length <= 6) {
-      return 'Your Password length should be greater 6 charaters ';
+      return 'Your Password length should be greater 6 charaters';
     }
     return undefined;
   }

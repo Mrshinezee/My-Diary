@@ -1,52 +1,32 @@
-const myDiary = [
-  {
-    id: 1,
-    Title: 'The two solider sons',
-    entry: 'The eldest son in a family of three boys, Aricles had no desire to be a soldier',
-  },
-  {
-    id: 2,
-    // Title: '                  Falling in love',
-    Title: '      ',
-    entry: 'Everything happened with millsecond, beautiful girl passsing by with alovely smile',
-  },
-  {
-    id: 4,
-    Title: 'The new work',
-    entry: 'Everything happened with millsecond, beautiful girl passsing by with alovely smile',
-  },
-  {
-    id: 5,
-    Title: 'the beautiful ones',
-    entry: 'Is a fact that the beautiful ones are not yet born',
-  },
-];
+import client from '../models/database';
 
 class myDiaryController {
   static createEntry(req, res) {
-    const entry = req.body;
-    if (!entry.id) {
-      res.status(500).json({ message: 'error while creating entry' });
-    } else {
-      myDiary.push(entry);
-      res.status(201).json({
-        success: 'entry created successfully',
-        result: myDiary,
-      });
-    }
+    const entry = {
+      userId: req.body.userId,
+      entrytitle: req.body.entrytitle,
+      entrycontent: req.body.entrycontent,
+    };
+    const query = {
+      text: 'INSERT INTO entries(userId, entrytitle, entrycontent) VALUES($1, $2, $3)',
+      values: [entry.userId, entry.entrytitle, entry.entrycontent],
+    };
+    client.query(query).then(() => res.status(201).json({
+      success: true,
+      message: 'Entry Successfully created',
+      entry,
+    })).catch(error => res.status(500).json({ message: error.message }));
   }
 
-  static getAllEntries(req, res) {
-    const entry = myDiary;
-    if (!entry) {
-      res.status(404).json({ message: 'No Entry Available' });
-    } else {
-      const result = myDiaryController.processData(entry);
-      res.status(201).json({
-        success: 'success',
-        result,
-      });
-    }
+  static getAllEntries(request, response) {
+    client.query('SELECT * FROM entries')
+      .then(entry => response.status(201)
+        .json({
+          success: true,
+          message: 'entries successfully retrieved',
+          entry: entry.rows,
+        }))
+      .catch(error => response.status(500).json({ message: error.message }));
   }
 
   static processData(data) {
@@ -69,40 +49,67 @@ class myDiaryController {
   }
 
   static getEntryById(req, res) {
-    const id = parseInt(req.params.id, 10);
-    const entry = myDiary.filter(diary => diary.id === id)[0];
-    if (!entry) {
-      res.status(404).json({ message: 'Entry was not found' });
-    } else {
-      res.status(201).json({
-        success: 'success',
-        result: entry,
+    const entryId = parseInt(req.params.entryId, 10);
+    client.query({ text: 'SELECT * FROM entries where entryId = ($1) ', values: [entryId] })
+      .then((entry) => {
+        if (entry.rowCount === 1) {
+          res.status(201).json({
+            success: true,
+            entry: entry.rows
+          });
+        }
+        res.status(404).json({
+          success: false,
+          message: 'Entry not found',
+        });
+        return null;
       });
-    }
   }
 
   static editEntry(req, res) {
-    const id = parseInt(req.params.id, 10);
-    const entry = myDiary.filter(diary => diary.id === id)[0];
-    entry.Title = req.body.Title;
-    entry.entry = req.body.entry;
-    res.status(201).json({
-      success: 'successfully edited',
-      result: myDiary,
-    });
+    const entryId = parseInt(req.params.entryId, 10);
+    const entry = {
+      entrytitle: req.body.entrytitle,
+      entrycontent: req.body.entrycontent,
+    };
+    const query = {
+      text: 'UPDATE entries SET entrytitle = ($1), entrycontent = ($2) WHERE entryId = ($3) RETURNING entrytitle ,entrycontent',
+      values: [entry.entrytitle, entry.entrycontent, entryId],
+    };
+    client.query(query)
+      .then((editEntry) => {
+        if (editEntry.rowCount === 1) {
+          res.status(201).json({
+            success: true,
+            message: 'successfully edited',
+            entry: editEntry.rows,
+          });
+        }
+        res.status(404).json({
+          success: false,
+          message: 'Entry not found',
+        });
+        return null;
+      });
   }
 
   static deleteEntry(req, res) {
-    const id = parseInt(req.params.id, 10);
-    const entry = myDiary.filter(diary => diary.id === id)[0];
-    const index = myDiary.indexOf(entry);
-    if (index !== -1) {
-      myDiary.splice(index, 1);
-    }
-    res.status(201).json({
-      success: 'successfully deleted',
-      result: myDiary,
-    });
+    const entryId = parseInt(req.params.entryId, 10);
+    client.query('DELETE FROM entries WHERE entryId = ($1) RETURNING *', [entryId])
+      .then((entry) => {
+        if (entry.rowCount === 1) {
+          res.status(201).json({
+            success: true,
+            message: 'successfully deleted',
+            entry: entry.rows,
+          });
+        }
+        res.status(404).json({
+          success: false,
+          message: 'Entry not found',
+        });
+        return null;
+      });
   }
 }
 export default myDiaryController;
