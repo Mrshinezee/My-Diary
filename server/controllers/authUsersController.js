@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-// import validator from '../../helpers/user';
 import bcrypt from 'bcrypt';
 import client from '../models/database';
 
@@ -10,6 +9,30 @@ class authUsersController {
 
   static isValidPassword(userpass, password) {
     return bcrypt.compareSync(password, userpass);
+  }
+
+  static userLogin(request, response) {
+    const { email, password } = request.body;
+    client.query({ text: 'SELECT * FROM users where email = $1', values: [email] })
+      .then((user) => {
+        if (user.rowCount === 1) {
+          const checker = authUsersController.isValidPassword(user.rows[0].password, password);
+          if (checker) {
+            jwt.sign({ user: user.rows[0].userId }, 'secretKey', (err, token) => response.json({
+              success: true,
+              message: 'user successfully login',
+              user: user.rows,
+              token,
+            }))
+              .catch(error => response.status(500).json({ message: error.message }));
+          }
+        }
+        response.status(400).json({
+          success: false,
+          message: 'Your email or password is incorrect',
+        });
+        return null;
+      });
   }
 
   static registerUser(request, response) {
@@ -43,7 +66,7 @@ class authUsersController {
       }
       return response.status(409).json({
         success: false,
-        message: 'This account is already existing',
+        message: 'An account already existing with this email address',
       });
     });
   }

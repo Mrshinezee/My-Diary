@@ -1,7 +1,7 @@
 import chaiHttp from 'chai-http';
 import chai from 'chai';
 import { describe } from 'mocha';
-import app from '../../app';
+import app from '../../../app';
 
 chai.use(chaiHttp);
 chai.should();
@@ -12,8 +12,9 @@ describe('TESTING GET ALL ENTRY ENDPOINT', () => {
         .get('/api/v1/entries')
         .end((error, response) => {
           response.should.have.status(201);
-          response.body.result.should.be.a('array');
-          response.body.should.have.property('success').eql('success');
+          response.body.entry.should.be.a('array');
+          response.body.should.have.property('message').eql('entries successfully retrieved');
+          response.body.should.have.property('success').eql(true);
           done();
         });
     });

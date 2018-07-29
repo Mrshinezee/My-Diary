@@ -8,7 +8,6 @@ body {
        height: 100%;
        background-color: #D9D9D9;
    }
-   
 .logo_sub{
     font-size: 40px;
     margin: auto;
@@ -283,7 +282,7 @@ footer {
       
       table thead {
         border: none;
-        clip: rect(0 0 0 0);
+        /* clip: rect(0 0 0 0); */
         height: 1px;
         margin: -1px;
         overflow: hidden;

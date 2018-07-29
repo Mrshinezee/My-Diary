@@ -24,7 +24,7 @@ body {
     }
    .centring-div a:hover{
     text-decoration:none;
-    color: #F19F4D;
+    /* color: #F19F4D; */
   }
    #no_account{
        font-family: Arial, Helvetica, sans-serif;
