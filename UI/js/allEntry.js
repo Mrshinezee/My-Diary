@@ -31,7 +31,18 @@ for (let index = 0; index < diary.length; index += 1) {
                          <div class="delete" onclick="getEntries.deleteTableEntry(${diary[index].id});"></div>
                         `;
 }
+
+
+const modalHeaderHtml = '<div class="logo_sub" >DELETE</div>';
+const modalContentHtml = '<p style="text-align: center;"> Entry will be removed permanetly</p>';
+const modalFooterHtml = '<div class="btn-div"><button class="btn btn-back" onclick="updateModal();"><i class="fa fa-pencil-square-o"></i> Proceed</button><button class="btn closeUpdate" id="btn-close" onclick="closeViewModal();"><i class="fa fa-close"></i> Close</button></div><br>';
+
 const viewModal = document.getElementById('view-modal');
+const closeViewModal = () => {
+  viewModal.style.display = 'none';
+  viewModal.innerHTML = '';
+};
+
 const modalbuilder = () => {
   const modalBody = document.createElement('div');
   modalBody.className = 'modalBody';
@@ -41,37 +52,19 @@ const modalbuilder = () => {
   modalContent.className = 'modalContent';
   const modalfooter = document.createElement('div');
   modalfooter.className = 'modalfooter';
-  modalHeader.innerHTML = `
-  <div class="logo_sub" >DELETE</div>
-  `;
-  modalContent.innerHTML = `
-           <p style='text-align: center;'> Entry will be removed permanetly</p>
-  `;
-  modalfooter.innerHTML = `<div class="btn-div">
-  <button class="btn btn-back" onclick="updateModal();">
-    <i class="fa fa-pencil-square-o"></i> Proceed
-  </button>
-  <button class="btn closeUpdate" id="btn-close" onclick="closeViewModal();">
-    <i class="fa fa-close"></i> Close
-  </button>
-</div><br>`;
+  modalHeader.innerHTML = modalHeaderHtml;
+  modalContent.innerHTML = modalContentHtml;
+  modalfooter.innerHTML = modalFooterHtml;
   modalBody.appendChild(modalHeader);
   modalBody.appendChild(modalContent);
   modalBody.appendChild(modalfooter);
   viewModal.appendChild(modalBody);
-
   viewModal.style.display = 'block';
   window.addEventListener('click', (event) => {
     if (event.target === viewModal) {
-      viewModal.style.display = 'none';
-      viewModal.innerHTML = '';
+      closeViewModal();
     }
   });
-};
-
-const closeViewModal = () => {
-  viewModal.style.display = 'none';
-  viewModal.innerHTML = '';
 };
 
 const getEntries = {
@@ -90,35 +83,34 @@ const getEntries = {
 };
 
 const editModal = document.getElementById('edit-modal');
+const closeUpdateModal = () => {
+  editModal.style.display = 'none';
+  editModal.innerHTML = '';
+};
+const updatebody = document.createElement('div');
+const updateDiv = document.createElement('div');
+const headerDiv = document.createElement('div');
+const titleDiv = document.createElement('div');
+const entryDiv = document.createElement('div');
+const submitDiv = document.createElement('div');
+const closeDownUpdate = document.createElement('button');
+const submitUpdateBtn = document.createElement('button');
+const form = document.createElement('form');
+updatebody.className = 'editBody';
+updateDiv.className = 'editDiary';
+headerDiv.textContent = 'Edit Entry';
+headerDiv.className = 'logo_sub';
+titleDiv.className = 'form';
+entryDiv.className = 'form';
+submitDiv.className = 'centre-div';
+
 const updateModal = () => {
-  const updatebody = document.createElement('div');
-  const updateDiv = document.createElement('div');
-  const headerDiv = document.createElement('div');
-  const titleDiv = document.createElement('div');
-  const entryDiv = document.createElement('div');
-  const submitDiv = document.createElement('div');
-  const closeDownUpdate = document.createElement('button');
-  const submitUpdateBtn = document.createElement('button');
-  updatebody.className = 'editBody';
-  updateDiv.className = 'editDiary';
-  headerDiv.textContent = 'Edit Entry';
-  headerDiv.className = 'logo_sub';
-  const form = document.createElement('form');
-  titleDiv.className = 'form';
-  entryDiv.className = 'form';
-  submitDiv.className = 'centre-div';
   submitUpdateBtn.textContent = 'Update';
-  closeDownUpdate.textContent = 'Close';
   submitUpdateBtn.className = 'btn-back';
+  closeDownUpdate.textContent = 'Close';
   closeDownUpdate.className = 'closeUpdate';
-  titleDiv.innerHTML = `
-                <label for="title">Entry Title</label>
-                <input type="text" name="entryTitle" id="diaryTitle" value="${diary[1].Title}" >
-    `;
-  entryDiv.innerHTML = `
-                <label for="entry">Diary Entry</label>
-                <textarea name="entry" id="diaryEntry" rows="5" cols="50" required>${diary[1].entry}</textarea>
-    `;
+  titleDiv.innerHTML = `<label for="title">Entry Title</label><input type="text" name="entryTitle" id="diaryTitle" value="${diary[1].Title}" >`;
+  entryDiv.innerHTML = `<label for="entry">Diary Entry</label><textarea name="entry" id="diaryEntry" rows="5" cols="50" required>${diary[1].entry}</textarea>`;
   form.appendChild(titleDiv);
   form.appendChild(entryDiv);
   submitDiv.appendChild(closeDownUpdate);
@@ -129,25 +121,21 @@ const updateModal = () => {
   updatebody.appendChild(updateDiv);
   editModal.appendChild(updatebody);
   editModal.style.display = 'block';
-  const diaryTitle = document.getElementById('diaryTitle');
-  const diaryEntry = document.getElementById('diaryEntry');
   window.addEventListener('click', (event) => {
     if (event.target === editModal) {
-      editModal.style.display = 'none';
-      editModal.innerHTML = '';
+      closeUpdateModal();
     }
   });
-  submitUpdateBtn.addEventListener('click', () => {
-    const requestBody = {
-      title: diaryTitle.value,
-      entry: diaryEntry.value,
-    };
-  });
-  const closeUpdateModal = () => {
-    editModal.style.display = 'none';
-    editModal.innerHTML = '';
-  };
-  closeDownUpdate.addEventListener('click', () => {
-    closeUpdateModal();
-  });
 };
+
+const diaryTitle = document.getElementById('diaryTitle');
+const diaryEntry = document.getElementById('diaryEntry');
+closeDownUpdate.addEventListener('click', () => {
+  closeUpdateModal();
+});
+submitUpdateBtn.addEventListener('click', () => {
+  const requestBody = {
+    title: diaryTitle.value,
+    entry: diaryEntry.value,
+  };
+});

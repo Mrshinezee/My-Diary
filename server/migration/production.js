@@ -1,5 +1,5 @@
 import winston from 'winston';
-import db from './database';
+import pool from '../models/database';
 
 const GenerateUserTable = `
 DROP TABLE IF EXISTS users CASCADE;
@@ -27,6 +27,6 @@ CREATE TABLE entries (
 
 const query = `${GenerateUserTable} ${generateEntryTable}`;
 
-db.query(query)
+pool.query(query)
   .then(() => process.exit())
   .catch(error => winston.log(error));

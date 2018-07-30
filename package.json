@@ -6,9 +6,10 @@
   "scripts": {
     "test": "npm run mig && nyc --reporter=text --reporter=lcov mocha --require babel-core/register ./server/tests/index.js  --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "start": "nodemon app.js --exec babel-node --presets es2015",
-    "prod:mig": "babel-node ./server/models/production.js",
-    "mig": "psql -U postgres -f  ./server/models/seeder.sql"
+    "start": "babel-node app.js --exec  --presets es2015",
+    "start:dev": "nodemon  app.js --exec babel-node --presets es2015",
+    "mig": "babel-node ./server/migration/production.js"
+    
   },
   "keywords": [
     "node",
