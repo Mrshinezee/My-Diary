@@ -35,7 +35,7 @@ for (let index = 0; index < diary.length; index += 1) {
 
 const modalHeaderHtml = '<div class="logo_sub" >DELETE</div>';
 const modalContentHtml = '<p style="text-align: center;"> Entry will be removed permanetly</p>';
-const modalFooterHtml = '<div class="btn-div"><button class="btn btn-back" onclick="updateModal();"><i class="fa fa-pencil-square-o"></i> Proceed</button><button class="btn closeUpdate" id="btn-close" onclick="closeViewModal();"><i class="fa fa-close"></i> Close</button></div><br>';
+const modalFooterHtml = '<div class="btn-div"><button class="btn btn-back" onclick="updateModal();"><i class="fa fa-pencil-square-o"></i> OK</button><button class="btn closeUpdate" id="btn-close" onclick="closeViewModal();"><i class="fa fa-close"></i> Cancel</button></div><br>';
 
 const viewModal = document.getElementById('view-modal');
 const closeViewModal = () => {

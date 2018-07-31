@@ -50,7 +50,7 @@
     overflow: auto;
     padding: 20px,20px;
     top: 0;
-    width: 40%; 
+    width: 70%; 
     border: 1px solid blue;
     margin-bottom: 5%;
    }
@@ -92,6 +92,7 @@ textarea{
     margin: 0 auto 0 auto;
     font-size: 20px;
     box-sizing: border-box;
+    resize: none;
     background: transparent;
 }
    button[type="submit"] {
@@ -110,7 +111,13 @@ textarea{
        border: 1px solid #f28e53;
 
    }
-   
+   .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+  }
    footer {
        position: fixed;
        left: 0;
@@ -131,8 +138,9 @@ textarea{
         height: 70px;
       }   
    #dailyEntry {
-    width:65%;
-    height: 600px;
+    width:70%;
+    height: 450px;
+    margin-bottom: 100px;
    }
   #dailyEntry form{
     width: 90%;
@@ -143,7 +151,6 @@ textarea{
     padding: 5px;
     margin: 5px;
     font-size: 10px;
-    border: 1px solid #f28e53;
     
 }
 button[type="submit"] {
@@ -154,6 +161,7 @@ button[type="submit"] {
 }
     textarea{
         width: 98%;
+        height: 10%;
     }  
     
 }

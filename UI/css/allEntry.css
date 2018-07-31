@@ -120,6 +120,7 @@ body {
    textarea{
     vertical-align:top;
     width: 80%;
+    resize: none;
     height: 100%;
     padding: 12px 20px;
     margin: 0 auto 0 auto;
@@ -315,16 +316,16 @@ footer {
         border-bottom: 0;
       }
       .editDiary {
-        height: 80%; 
-        width: 99%; 
+        height: 60%; 
+        width: 90%; 
         top: 10%;
-        left: 0;
+        left: 2%;
       }
     .modalBody {  
-        height: 50%; 
-        width: 98%; 
+        height: 40%; 
+        width: 80%; 
         top: 10%;
-        left: 0; 
+        left: 8%; 
       }
       #close, .closeUpdate {
         margin-right: 20px;

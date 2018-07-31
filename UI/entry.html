@@ -7,7 +7,6 @@
   <link rel="shortcut icon" type="image/png" href="http://res.cloudinary.com/dowmiccxo/image/upload/v1531255458/fav.png"/>
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/entry.css">
-  <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
   <title>New Entry</title>
@@ -28,9 +27,9 @@
   
         <input type="checkbox" id="menu-check">
         <div class="menu-links-right">
-          <a href="allEntry.html">Entries</a>
-          <a href="setting.html">Shine</a>
-          <a href="index.html">Logout</a>
+          <a href="allEntry.html"><i class="fa fa-book"></i>Entries</a>
+          <a href="setting.html"><i class="fa fa-user"></i>Shine</a>
+          <a href="index.html"><i class="fa fa-sign-out"></i>Logout</a>
         </div>      
       </div>
        
@@ -39,21 +38,23 @@
                    <div class="logo_sub" > NEW ENTRY</div>
                       </div>
                         </div>
-                <div id="dailyEntry">
+                <div class="container">
+                  <div id="dailyEntry" >
                     <form>
-                        <p id="today">
-                               <span>Thursday,  </span><span>12-06-2018</span>
-                        </p>
-                        <p>
-                                <span><label for="topic">Title</label></span>
-                                <input type="text" id="topic" name="topic" placeholder="Entry Tiltle">
-                        </p>
-                        <p>
-                               <span><label for="content">Entry</label></span> 
-                                <textarea name="content" id="content" cols="30" rows="10"></textarea>
-                        </p>
-                            <button type="submit" name="save" id="submitEntry">save</button>
-                    </form>
+                      <p id="today">
+                             <span>Thursday,  </span><span>12-06-2018</span>
+                      </p>
+                      <p>
+                              <span><label for="topic">Title</label></span>
+                              <input type="text" id="topic" name="topic" placeholder="Entry Tiltle">
+                      </p>
+                      <p>
+                             <span><label for="content">Entry</label></span> 
+                              <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                      </p>
+                          <button type="submit" name="save" id="submitEntry">save</button>
+                  </form>
+                  </div>
                 </div>
         </div>    
             

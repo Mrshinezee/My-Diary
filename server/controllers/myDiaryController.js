@@ -18,15 +18,22 @@ class myDiaryController {
     })).catch(error => res.status(500).json({ message: error.message }));
   }
 
-  static getAllEntries(request, response) {
+  static getAllEntries(req, res) {
     client.query('SELECT * FROM entries')
-      .then(entry => response.status(201)
-        .json({
-          success: true,
-          message: 'entries successfully retrieved',
-          entry: entry.rows,
-        }))
-      .catch(error => response.status(500).json({ message: error.message }));
+      .then((entry) => {
+        if (entry.rowCount === 1) {
+          res.status(201).json({
+            success: true,
+            message: 'entries successfully retrieved',
+            entry: entry.rows,
+          });
+        }
+        res.status(404).json({
+          success: false,
+          message: 'No entry found',
+        });
+      })
+      .catch(error => res.status(500).json({ message: error.message }));
   }
 
   static processData(data) {
@@ -63,7 +70,8 @@ class myDiaryController {
           message: 'Entry not found',
         });
         return null;
-      });
+      })
+      .catch(error => res.status(500).json({ message: error.message }));
   }
 
   static editEntry(req, res) {
@@ -90,7 +98,8 @@ class myDiaryController {
           message: 'Entry not found',
         });
         return null;
-      });
+      })
+      .catch(error => res.status(500).json({ message: error.message }));
   }
 
   static deleteEntry(req, res) {
@@ -109,7 +118,8 @@ class myDiaryController {
           message: 'Entry not found',
         });
         return null;
-      });
+      })
+      .catch(error => res.status(500).json({ message: error.message }));
   }
 }
 export default myDiaryController;
