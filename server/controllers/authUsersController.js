@@ -12,6 +12,22 @@ class authUsersController {
     return bcrypt.compareSync(password, userpass);
   }
 
+  static validToken(request, response, next) {
+    const bearerHeader = request.headers.authorization;
+    if (typeof bearerHeader !== 'undefined') {
+      const bearer = bearerHeader.split(' ');
+      const bearerToken = bearer[1];
+      jwt.verify(bearerToken, 'secretKey', (err) => {
+        if (err) {
+          return response.status(401).send({ message: 'Please register or login to gain access' });
+        }
+        return next();
+      });
+    } else {
+      return response.status(401).send({ message: 'Please register or login to gain access' });
+    }
+  }
+
   static userLogin(request, response) {
     const entry = {
       email: request.body.email,
