@@ -127,7 +127,7 @@ describe('TESTING CREATE A USER ENDPOINT', () => {
           response.should.have.status(404);
           response.body.should.have.property('success').eql(false);
           expect(response.body.errors).to.be.an('object');
-          response.body.errors.password.should.eql('Your Password length should be greater 6 charaters');
+          response.body.errors.password.should.eql('Your password length should be greater 6 charaters');
           done();
         });
     });
