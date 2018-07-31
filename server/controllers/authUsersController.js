@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import validator from 'validator';
 import client from '../models/database';
 
 class authUsersController {
@@ -12,34 +13,41 @@ class authUsersController {
   }
 
   static userLogin(request, response) {
-    const { email, password } = request.body;
-    client.query({ text: 'SELECT * FROM users where email = $1', values: [email] })
-      .then((user) => {
-        if (user.rowCount === 1) {
-          const checker = authUsersController.isValidPassword(user.rows[0].password, password);
-          if (checker) {
-            jwt.sign({ user: user.rows[0].userId }, 'secretKey', (err, token) => response.json({
-              success: true,
-              message: 'user successfully login',
-              user: user.rows,
-              token,
-            }))
-              .catch(error => response.status(500).json({ message: error.message }));
-          }
+    const entry = {
+      email: request.body.email,
+      password: validator.trim(String(request.body.password)).replace(/\s/g, ''),
+    };
+    const query = { text: 'SELECT * FROM users where email = $1', values: [entry.email] };
+    return authUsersController.signInUsers(request, response, query, entry);
+  }
+
+  static signInUsers(request, response, query, entry) {
+    client.query(query).then((user) => {
+      if (user.rowCount === 1) {
+        const checker = authUsersController.isValidPassword(user.rows[0].password, entry.password);
+        if (checker) {
+          jwt.sign({ user: user.rows[0].userId }, 'secretKey', (err, token) => response.json({
+            success: true,
+            message: 'user successfully login',
+            user: user.rows,
+            token,
+          }))
+            .catch(error => response.status(500).json({ message: error.message }));
         }
-        response.status(400).json({
-          success: false,
-          message: 'Your email or password is incorrect',
-        });
-        return null;
+      }
+      response.status(400).json({
+        success: false,
+        message: 'Your email or password is incorrect',
       });
+      return null;
+    });
   }
 
   static registerUser(request, response) {
-    const hashPassword = authUsersController.hashpassword(request.body.password);
+    const hashPassword = authUsersController.hashpassword(validator.trim(String(request.body.password)).replace(/\s/g, ''));
     const collection = {
-      firstName: request.body.firstName,
-      lastName: request.body.lastName,
+      firstName: validator.trim(String(request.body.firstName)).replace(/ +(?= )/g, ''),
+      lastName: validator.trim(String(request.body.lastName)).replace(/ +(?= )/g, ''),
       email: request.body.email,
       password: hashPassword,
     };

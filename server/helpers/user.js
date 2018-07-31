@@ -39,7 +39,7 @@ class UserValidation {
       }
     }
     if (collection.password) {
-      const result = UserValidation.checkPassword(String(collection.password));
+      const result = UserValidation.checkParam(String(collection.password), 'pw', required[1]);
       errors.password = result;
       if (result) {
         isValid = false;
@@ -72,21 +72,21 @@ class UserValidation {
       }
     }
     if (collection.password) {
-      const result = UserValidation.checkPassword(String(collection.password));
+      const result = UserValidation.checkParam(String(collection.password), 'pw', required[1]);
       errors.password = result;
       if (result) {
         isValid = false;
       }
     }
     if (collection.firstName) {
-      const result = UserValidation.checkFirstName(String(collection.firstName));
+      const result = UserValidation.checkParam(String(collection.firstName), 'nm', required[2]);
       errors.firstName = result;
       if (result) {
         isValid = false;
       }
     }
     if (collection.lastName) {
-      const result = UserValidation.checkLastName(String(collection.lastName));
+      const result = UserValidation.checkParam(String(collection.lastName), 'nm', required[3]);
       errors.lastName = result;
       if (result) {
         isValid = false;
@@ -101,42 +101,26 @@ class UserValidation {
     });
   }
 
-  static checkFirstName(param) {
-    const firstName = param.trim();
-    if (validator.isEmpty(firstName)) {
-      return 'Your firstName cannot be empty';
+  static checkParam(param, type, name) {
+    if (type === 'nm') {
+      const value = param.trim();
+      if (validator.isEmpty(value)) {
+        return `Your ${name} cannot be empty`;
+      }
+      if (value.length <= 2) {
+        return `Your ${name} should be greater than 2 charaters`;
+      }
+      return undefined;
+    } if (type === 'pw') {
+      const password = param.trim();
+      if (validator.isEmpty(password)) {
+        return `Your ${name} cannot be empty`;
+      }
+      if (password.length <= 6) {
+        return `Your ${name} length should be greater 6 charaters`;
+      }
+      return undefined;
     }
-
-    if (firstName.length <= 2) {
-      return 'Your firstName  should be greater than 2 charaters ';
-    }
-    return undefined;
-  }
-
-
-  static checkLastName(param) {
-    const lastName = param.trim();
-    if (validator.isEmpty(lastName)) {
-      return 'Your lastName cannot be empty';
-    }
-
-    if (lastName.length <= 2) {
-      return 'Your lastName should be greater than 2 charaters';
-    }
-    return undefined;
-  }
-
-
-  static checkPassword(param) {
-    const password = param.trim();
-    if (validator.isEmpty(password)) {
-      return 'Your password cannot be empty';
-    }
-
-    if (password.length <= 6) {
-      return 'Your Password length should be greater 6 charaters';
-    }
-    return undefined;
   }
 }
 export default UserValidation;
