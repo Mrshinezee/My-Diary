@@ -3,6 +3,7 @@ import chai, { expect } from 'chai';
 import { describe } from 'mocha';
 import app from '../../../app';
 
+
 chai.use(chaiHttp);
 chai.should();
 describe('TESTING CREATE A USER ENDPOINT', () => {
@@ -18,6 +19,7 @@ describe('TESTING CREATE A USER ENDPOINT', () => {
         .post('/api/v1/auth/signup')
         .send(user1)
         .end((error, response) => {
+          expect(response.body.data).to.be.an('object');
           expect(response.body.data).to.be.an('object');
           expect(response).to.have.status(201);
           response.body.should.have.property('message');
