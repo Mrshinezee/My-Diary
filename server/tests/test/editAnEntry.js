@@ -29,7 +29,6 @@ describe('TESTING EDIT AN ENTRY ENDPOINT', () => {
     });
     it('should edit a SINGLE entry on /entries/<id> PUT', (done) => {
       const entry = {
-        userId: 1,
         entrytitle: 'The evil ones',
         entrycontent: 'The eldest son, born with a heart as black as charcoal',
       };

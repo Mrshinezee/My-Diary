@@ -21,7 +21,7 @@ class authUsersController {
         if (err) {
           return response.status(401).send({ message: 'Please register or login to gain access' });
         }
-        request.user = decoded.user;
+        request.userId = decoded.user;
         return next();
       });
     } else {
@@ -43,7 +43,7 @@ class authUsersController {
       if (user.rowCount === 1) {
         const checker = authUsersController.isValidPassword(user.rows[0].password, entry.password);
         if (checker) {
-          jwt.sign({ user: user.rows[0].userId }, 'secretKey', (err, token) => response.json({
+          jwt.sign({ user: user.rows[0].userid }, 'secretKey', (err, token) => response.json({
             success: true,
             message: 'user successfully login',
             user: user.rows,

@@ -19,9 +19,10 @@ class myDiaryController {
   }
 
   static getAllEntries(req, res) {
-    client.query('SELECT * FROM entries')
+    const user = req.userId;
+    client.query('SELECT * FROM entries where userid = $1', [user])
       .then((entry) => {
-        if (entry.rowCount === 1) {
+        if (entry.rowCount >= 1) {
           res.status(201).json({
             success: true,
             message: 'entries successfully retrieved',
@@ -57,7 +58,8 @@ class myDiaryController {
 
   static getEntryById(req, res) {
     const entryId = parseInt(req.params.entryId, 10);
-    client.query({ text: 'SELECT * FROM entries where entryId = ($1) ', values: [entryId] })
+    const user = req.userId;
+    client.query({ text: 'SELECT * FROM entries where entryId = $1 and userId = $2 ', values: [entryId, user] })
       .then((entry) => {
         if (entry.rowCount === 1) {
           res.status(201).json({
@@ -75,14 +77,15 @@ class myDiaryController {
   }
 
   static editEntry(req, res) {
+    const user = req.userId;
     const entryId = parseInt(req.params.entryId, 10);
     const entry = {
       entrytitle: req.body.entrytitle,
       entrycontent: req.body.entrycontent,
     };
     const query = {
-      text: 'UPDATE entries SET entrytitle = ($1), entrycontent = ($2) WHERE entryId = ($3) RETURNING entrytitle ,entrycontent',
-      values: [entry.entrytitle, entry.entrycontent, entryId],
+      text: 'UPDATE entries SET entrytitle = ($1), entrycontent = ($2) WHERE entryId = ($3) and userId = ($4)  RETURNING entrytitle ,entrycontent',
+      values: [entry.entrytitle, entry.entrycontent, entryId, user],
     };
     client.query(query)
       .then((editEntry) => {
@@ -103,8 +106,9 @@ class myDiaryController {
   }
 
   static deleteEntry(req, res) {
+    const user = req.userId;
     const entryId = parseInt(req.params.entryId, 10);
-    client.query('DELETE FROM entries WHERE entryId = ($1) RETURNING *', [entryId])
+    client.query('DELETE FROM entries WHERE entryId = $1 and userId = $2 RETURNING *', [entryId, user])
       .then((entry) => {
         if (entry.rowCount === 1) {
           res.status(201).json({
