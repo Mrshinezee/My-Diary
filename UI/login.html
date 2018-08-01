@@ -45,17 +45,20 @@
             <form action="entry.html" method="get"> 
                 <div class="centring-div">
                     <h4>LOG IN</h4>
+                    <p id="loginMessage"></p>
+                    <p id="loginSuccess"></p>
                 </div>
               <p> 
                 <input type="email" id="email" placeholder="Email" required /> 
               </p>
-              <p id="email-alert" class="alert-class"></p>
+              <p id="emailError" class="alert-class"></p>
               <p> 
                 <input type="password" id="password" placeholder="Password" required />
               </p>
-              <p id="password-alert" class="alert-class"></p>
+              <p id="passwordError" class="alert-class"></p>
               <p class="sign-up"> 
-                    <input type="submit" id="loginUser" onchange="login()"/> 
+                    <button type="button" id="loginUser" onclick="login()" >Login</button>
+
               </p>
             </form>
         </div>  
