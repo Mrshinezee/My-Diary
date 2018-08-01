@@ -7,6 +7,8 @@ module.exports = {
         "describe": true,
         "it": true,
         "fetch": true,
+        "localStorage": true,
+        "alert": true,
     },
     "rules": {
         "one-var": 0,
