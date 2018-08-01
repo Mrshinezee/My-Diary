@@ -32,7 +32,7 @@ describe('TESTING GET ALL ENTRY ENDPOINT', () => {
         .get('/api/v1/entries')
         .set('authorization', `Bearer ${toker}`)
         .end((error, response) => {
-          response.should.have.status(201);
+          response.should.have.status(200);
           response.body.entry.should.be.a('array');
           response.body.should.have.property('message').eql('entries successfully retrieved');
           response.body.should.have.property('success').eql(true);

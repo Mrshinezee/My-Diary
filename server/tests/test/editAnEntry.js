@@ -29,7 +29,6 @@ describe('TESTING EDIT AN ENTRY ENDPOINT', () => {
     });
     it('should edit a SINGLE entry on /entries/<id> PUT', (done) => {
       const entry = {
-        userId: 1,
         entrytitle: 'The evil ones',
         entrycontent: 'The eldest son, born with a heart as black as charcoal',
       };
@@ -38,7 +37,7 @@ describe('TESTING EDIT AN ENTRY ENDPOINT', () => {
         .set('authorization', `Bearer ${toker}`)
         .send(entry)
         .end((error, response) => {
-          response.should.have.status(201);
+          response.should.have.status(200);
           response.body.entry.should.be.a('array');
           response.body.should.have.property('message').eql('successfully edited');
           response.body.should.have.property('success').eql(true);

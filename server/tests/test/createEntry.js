@@ -39,7 +39,7 @@ describe('TESTING CREATE AN ENTRY ENDPOINT', () => {
         .send(entry)
         .end((error, response) => {
           response.should.have.status(201);
-          expect(response.body.entry).to.be.an('object');
+          expect(response.body.entry).to.be.an('array');
           response.body.should.have.property('message').eql('Entry Successfully created');
           response.body.should.have.property('success').eql(true);
           done();

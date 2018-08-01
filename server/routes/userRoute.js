@@ -3,7 +3,7 @@ import myDiaryController from '../controllers/myDiaryController';
 import UserValidation from '../helpers/user';
 
 const userRoute = (app) => {
-  app.post('/api/v1/entries', UserValidation.validateEntry, myDiaryController.createEntry);
+  app.post('/api/v1/entries', UserValidation.validateEntry, authUsersController.validToken, myDiaryController.createEntry);
   app.get('/api/v1/entries', authUsersController.validToken, myDiaryController.getAllEntries);
   app.get('/api/v1/entries/:entryId', authUsersController.validToken, myDiaryController.getEntryById);
   app.put('/api/v1/entries/:entryId', authUsersController.validToken, myDiaryController.editEntry);

@@ -2,7 +2,7 @@ import validator from 'validator';
 
 class UserValidation {
   static validateEntry(request, response, next) {
-    const required = ['userId', 'entrytitle', 'entrycontent'];
+    const required = ['entrytitle', 'entrycontent'];
     const collection = request.body;
     let isValid = true;
     const errors = {};
