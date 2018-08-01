@@ -32,7 +32,7 @@ describe('TESTING GET AN ENTRY ENDPOINT', () => {
         .get('/api/v1/entries/1')
         .set('authorization', `Bearer ${toker}`)
         .end((error, response) => {
-          response.should.have.status(201);
+          response.should.have.status(200);
           response.body.should.have.property('success');
           response.body.should.have.property('entry');
           response.body.success.should.eql(true);

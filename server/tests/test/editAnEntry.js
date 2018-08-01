@@ -37,7 +37,7 @@ describe('TESTING EDIT AN ENTRY ENDPOINT', () => {
         .set('authorization', `Bearer ${toker}`)
         .send(entry)
         .end((error, response) => {
-          response.should.have.status(201);
+          response.should.have.status(200);
           response.body.entry.should.be.a('array');
           response.body.should.have.property('message').eql('successfully edited');
           response.body.should.have.property('success').eql(true);

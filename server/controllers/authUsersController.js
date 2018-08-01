@@ -21,7 +21,7 @@ class authUsersController {
         if (err) {
           return response.status(401).send({ message: 'Please register or login to gain access' });
         }
-        request.userId = decoded.user;
+        request.body.userId = decoded.user;
         return next();
       });
     } else {
