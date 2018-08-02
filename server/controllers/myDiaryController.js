@@ -1,7 +1,8 @@
+// import validator from 'validator';
 import client from '../models/database';
 
-class myDiaryController {
-  static createEntry(req, res) {
+class MyDiaryController {
+  createEntry(req, res) {
     const { userId, entrytitle, entrycontent } = req.body;
     const query = {
       text: 'INSERT INTO entries(userId, entrytitle, entrycontent) VALUES($1, $2, $3) RETURNING entryid, userid, entrytitle ,entrycontent',
@@ -17,7 +18,7 @@ class myDiaryController {
       }).catch(error => res.status(500).json({ message: error.message }));
   }
 
-  static getAllEntries(req, res) {
+  getAllEntries(req, res) {
     const { userId } = req.body;
     client.query('SELECT * FROM entries where userid = $1', [userId])
       .then((entry) => {
@@ -36,26 +37,8 @@ class myDiaryController {
       .catch(error => res.status(500).json({ message: error.message }));
   }
 
-  static processData(data) {
-    const entry = data;
-    const result = [];
-    for (let i = 0; i < entry.length; i += 1) {
-      const check = (entry[i].Title).trim();
-      if (!check) {
-        let pickEntry = entry[i].entry;
-        let pickEntryArray = pickEntry.split(' ');
-        if (pickEntryArray.length > 10) {
-          pickEntryArray = pickEntryArray.slice(0, 10);
-          pickEntry = `${pickEntryArray.join(' ')}...`;
-          entry[i].Title = pickEntry;
-        }
-      }
-      result.push(entry[i]);
-    }
-    return result;
-  }
 
-  static getEntryById(req, res) {
+  getEntryById(req, res) {
     const entryId = parseInt(req.params.entryId, 10);
     const { userId } = req.body;
     client.query({ text: 'SELECT * FROM entries where entryId = $1 and userId = $2 ', values: [entryId, userId] })
@@ -75,7 +58,7 @@ class myDiaryController {
       .catch(error => res.status(500).json({ message: error.message }));
   }
 
-  static editEntry(req, res) {
+   editEntry(req, res) {
     const entryId = parseInt(req.params.entryId, 10);
     const { userId, entrytitle, entrycontent } = req.body;
     const query = {
@@ -84,23 +67,23 @@ class myDiaryController {
     };
     client.query(query)
       .then((editEntry) => {
+        console.log('ghj',editEntry.rowCount);
         if (editEntry.rowCount === 1) {
-          res.status(200).json({
+          return res.status(200).json({
             success: true,
-            message: 'successfully edited',
+            message: 'successfully updated',
             entry: editEntry.rows,
           });
-        }
-        res.status(404).json({
+        }else {
+        return res.status(404).json({
           success: false,
           message: 'Entry not found',
-        });
-        return null;
+        });}
       })
       .catch(error => res.status(500).json({ message: error.message }));
   }
 
-  static deleteEntry(req, res) {
+  deleteEntry(req, res) {
     const { userId } = req.body;
     const entryId = parseInt(req.params.entryId, 10);
     client.query('DELETE FROM entries WHERE entryId = $1 and userId = $2 RETURNING *', [entryId, userId])
@@ -121,4 +104,4 @@ class myDiaryController {
       .catch(error => res.status(500).json({ message: error.message }));
   }
 }
-export default myDiaryController;
+export default new MyDiaryController();

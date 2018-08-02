@@ -39,7 +39,7 @@ describe('TESTING EDIT AN ENTRY ENDPOINT', () => {
         .end((error, response) => {
           response.should.have.status(200);
           response.body.entry.should.be.a('array');
-          response.body.should.have.property('message').eql('successfully edited');
+          response.body.should.have.property('message').eql('successfully updated');
           response.body.should.have.property('success').eql(true);
           done();
         });
@@ -49,10 +49,10 @@ describe('TESTING EDIT AN ENTRY ENDPOINT', () => {
         .put('/api/v1/entries/50')
         .set('authorization', `Bearer ${toker}`)
         .end((error, response) => {
-          response.should.have.status(404);
+          response.should.have.status(400);
           expect(response).to.be.an('object');
           response.body.should.have.property('success').eql(false);
-          response.body.should.have.property('message').eql('Entry not found');
+          response.body.should.have.property('errors');
           done();
         });
     });

@@ -55,7 +55,7 @@ describe('TESTING CREATE AN ENTRY ENDPOINT', () => {
         .set('authorization', `Bearer ${toker}`)
         .send(Incompleteentrycontent)
         .end((error, response) => {
-          response.should.have.status(404);
+          response.should.have.status(400);
           expect(response.body.errors).to.be.an('object');
           done();
         });

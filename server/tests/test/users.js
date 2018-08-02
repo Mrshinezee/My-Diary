@@ -55,7 +55,7 @@ describe('TESTING CREATE A USER ENDPOINT', () => {
         .post('/api/v1/auth/signup')
         .send(user1)
         .end((error, response) => {
-          response.should.have.status(404);
+          response.should.have.status(400);
           response.body.should.have.property('success').eql(false);
           expect(response.body.errors).to.be.an('object');
           done();
@@ -72,7 +72,7 @@ describe('TESTING CREATE A USER ENDPOINT', () => {
         .post('/api/v1/auth/signup')
         .send(user1)
         .end((error, response) => {
-          response.should.have.status(404);
+          response.should.have.status(400);
           response.body.should.have.property('success').eql(false);
           expect(response.body.errors).to.be.an('object');
           response.body.errors.email.should.eql('please provide a valid email address');
@@ -90,7 +90,7 @@ describe('TESTING CREATE A USER ENDPOINT', () => {
         .post('/api/v1/auth/signup')
         .send(user1)
         .end((error, response) => {
-          response.should.have.status(404);
+          response.should.have.status(400);
           response.body.should.have.property('success').eql(false);
           expect(response.body.errors).to.be.an('object');
           response.body.errors.lastName.should.eql('Your lastName should be greater than 2 charaters');
@@ -108,7 +108,7 @@ describe('TESTING CREATE A USER ENDPOINT', () => {
         .post('/api/v1/auth/signup')
         .send(user1)
         .end((error, response) => {
-          response.should.have.status(404);
+          response.should.have.status(400);
           response.body.should.have.property('success').eql(false);
           expect(response.body.errors).to.be.an('object');
           response.body.errors.lastName.should.eql('Your lastName cannot be empty');
@@ -126,7 +126,7 @@ describe('TESTING CREATE A USER ENDPOINT', () => {
         .post('/api/v1/auth/signup')
         .send(user1)
         .end((error, response) => {
-          response.should.have.status(404);
+          response.should.have.status(400);
           response.body.should.have.property('success').eql(false);
           expect(response.body.errors).to.be.an('object');
           response.body.errors.password.should.eql('Your password length should be greater 6 charaters');
@@ -144,7 +144,7 @@ describe('TESTING CREATE A USER ENDPOINT', () => {
         .post('/api/v1/auth/signup')
         .send(user1)
         .end((error, response) => {
-          response.should.have.status(404);
+          response.should.have.status(400);
           response.body.should.have.property('success').eql(false);
           expect(response.body.errors).to.be.an('object');
           response.body.errors.password.should.eql('Your password cannot be empty');

@@ -1,27 +1,32 @@
 import validator from 'validator';
+import client from '../models/database';
 
-class UserValidation {
-  static validateEntry(request, response, next) {
-    const required = ['entrytitle', 'entrycontent'];
-    const collection = request.body;
+const userValidation = {
+  validateEntry(request, response, next) {
+    const { entrytitle, entrycontent } = request.body;
     let isValid = true;
     const errors = {};
-    for (let i = 0; i < required.length; i += 1) {
-      if (!collection[required[i]]) {
-        isValid = false;
-        errors[required[i]] = `please provide ${required[i]}`;
-      }
+    if (!entrytitle || !entrytitle.trim()) {
+      isValid = false;
+      errors.entrytitle = 'Entry title name is required';
+    } else {
+      request.body.entrytitle = entrytitle.trim();
+    }
+    if (!entrycontent || !entrycontent.trim()) {
+      isValid = false;
+      errors.entrycontent = 'Entry content is required';
+    } else {
+      request.body.entrycontent = entrycontent.trim();
     }
     if (isValid) {
       return next();
     }
-    return response.status(404).json({
+    return response.status(400).json({
       success: false,
       errors,
     });
-  }
-
-  static validateLogin(request, response, next) {
+  },
+  validateLogin(request, response, next) {
     const required = ['email', 'password'];
     const collection = request.body;
     let isValid = true;
@@ -39,22 +44,22 @@ class UserValidation {
       }
     }
     if (collection.password) {
-      const result = UserValidation.checkParam(String(collection.password), 'pw', required[1]);
+      const result = userValidation.checkParam(String(collection.password), 'pw', required[1]);
       errors.password = result;
       if (result) {
         isValid = false;
       }
     }
     if (isValid) {
+      request.body.password = collection.password.trim();
       return next();
     }
-    return response.status(404).json({
+    return response.status(400).json({
       success: false,
       errors,
     });
-  }
-
-  static validateRegistrationEntry(request, response, next) {
+  },
+  validateRegistrationEntry(request, response, next) {
     const required = ['email', 'password', 'firstName', 'lastName'];
     const collection = request.body;
     let isValid = true;
@@ -72,36 +77,38 @@ class UserValidation {
       }
     }
     if (collection.password) {
-      const result = UserValidation.checkParam(String(collection.password), 'pw', required[1]);
+      const result = userValidation.checkParam(String(collection.password), 'pw', required[1]);
       errors.password = result;
       if (result) {
         isValid = false;
       }
     }
     if (collection.firstName) {
-      const result = UserValidation.checkParam(String(collection.firstName), 'nm', required[2]);
+      const result = userValidation.checkParam(String(collection.firstName), 'nm', required[2]);
       errors.firstName = result;
       if (result) {
         isValid = false;
       }
     }
     if (collection.lastName) {
-      const result = UserValidation.checkParam(String(collection.lastName), 'nm', required[3]);
+      const result = userValidation.checkParam(String(collection.lastName), 'nm', required[3]);
       errors.lastName = result;
       if (result) {
         isValid = false;
       }
     }
     if (isValid) {
+      request.body.password = collection.password.trim();
+      request.body.firstName = collection.firstName.trim();
+      request.body.lastName = collection.lastName.trim();
       return next();
     }
-    return response.status(404).json({
+    return response.status(400).json({
       success: false,
       errors,
     });
-  }
-
-  static checkParam(param, type, name) {
+  },
+  checkParam(param, type, name) {
     if (type === 'nm') {
       const value = param.trim();
       if (validator.isEmpty(value)) {
@@ -121,6 +128,30 @@ class UserValidation {
       }
       return undefined;
     }
-  }
-}
-export default UserValidation;
+  },
+  validateParam(request, response, next) {
+    if (request.params.entryId && isNaN (parseInt(request.params.entryId, 10))) {
+      return response.status(400).json({
+        success: false,
+        message: 'The entryId provided must be an integer',
+      });
+    }
+    next();
+  },
+  checkExistingUser(request, response, next) {
+    const { email } = request.body;
+    client.query({ text: 'SELECT * FROM users where email = $1', values: [email] })
+      .then((user) => {
+        if (user.rowCount > 0) {
+          response.status(409).json({
+            success: false,
+            message: 'An account already existing with this email address',
+          });
+        } else {
+          next();
+        }
+      })
+      .catch(error => response.status(500).json({ message: error.message }));
+  },
+};
+export default userValidation;
