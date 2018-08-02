@@ -50,7 +50,7 @@ const getfetch = (content) => {
       } else {
         localStorage.setItem('authToken', `Bearer ${response.token}`);
         const roller = document.getElementById('registerSuccess');
-        roller.innerHTML = 'Login was successful...';
+        roller.innerHTML = 'Account created successfully...';
         setTimeout(() => {
           window.location.href = 'http://127.0.0.1:4500/allEntry.html';
         }, 3000);
