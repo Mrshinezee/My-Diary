@@ -1,6 +1,6 @@
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
-const url = '/api/v1/auth/login';
+const url = 'https://my-diary-collins.herokuapp.com/api/v1/auth/login';
 
 const validateErrorMessage = (data) => {
   if (data.message) {
@@ -28,7 +28,7 @@ const successLogin = (response) => {
   const roller = document.getElementById('loginSuccess');
   roller.innerHTML = 'Login was successful...';
   setTimeout(() => {
-    window.location.href = 'http://127.0.0.1:4500/allEntry.html';
+    window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
   }, 3000);
 };
 

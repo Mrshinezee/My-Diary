@@ -1,11 +1,11 @@
 const token = localStorage.getItem('authToken');
 if (!token) {
-  window.location.href = 'http://127.0.0.1:4500/index.html';
+  window.location.href = 'https://my-diary-collins.herokuapp.com/index.html';
 }
 
 const entrytitle = document.getElementById('topic');
 const entrycontent = document.getElementById('content');
-const url = '/api/v1/entries';
+const url = 'https://my-diary-collins.herokuapp.com/api/v1/entries';
 
 const makeEntry = () => {
   const entryMake = {
@@ -31,7 +31,7 @@ const makeEntry = () => {
         const { message, entry } = data;
         alert(message);
         setTimeout(() => {
-          window.location.href = 'http://127.0.0.1:4500/allEntry.html';
+          window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
         }, 2000);
       }
     });

@@ -5,7 +5,7 @@ const firstNameField = document.getElementById('firstname');
 const lastNameField = document.getElementById('lastname');
 const registerUser = document.getElementById('registerUser');
 const confirmpasswordAlert = document.getElementById('confirmpassword-alert');
-const url = '/api/v1/auth/signup';
+const url = 'https://my-diary-collins.herokuapp.com/api/v1/auth/signup';
 
 
 const validateError = (data) => {
@@ -52,7 +52,7 @@ const getfetch = (content) => {
         const roller = document.getElementById('registerSuccess');
         roller.innerHTML = 'Account created successfully...';
         setTimeout(() => {
-          window.location.href = 'http://127.0.0.1:4500/allEntry.html';
+          window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
         }, 3000);
       }
     });
