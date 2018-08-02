@@ -39,35 +39,37 @@
             <form> 
                 <div class="centring-div">
                     <h4>CREATE YOUR ACCOUNT</h4>
+                    <p id="registerMessage"></p>
+                    <p id="registerSuccess"></p>
                 </div>
              <p> 
                 <label for="firstname"> First name </label>
                 <input type="text" id="firstname" required /> 
               </p>
-              <p id="firstname-alert" class="alert-class"></p>
+              <p id="firstnameError" class="alert-class"></p>
              <p> 
                 <label for="lastname"> Last name </label>
                 <input type="text" id="lastname" required /> 
               </p>
-              <p id="lastname-alert" class="alert-class"></p>
+              <p id="lastnameError" class="alert-class"></p>
               <p> 
                 <label for="email"> Email </label>
                 <input type="email" id="email" required /> 
               </p>
-              <p id="email-alert" class="alert-class"></p>
+              <p id="emailError" class="alert-class"></p>
               <p> 
                 <label for="password" > Password </label>
                 <input type="password" id="password" required />
               </p>
-              <p id="password-alert" class="alert-class"></p>
+              <p id="passwordError" class="alert-class"></p>
               <p> 
                 <label for="confirmpassword" >Confirmed Password </label>
                 <input type="password" id="confirmpassword" required />
               </p>
               <p id="confirmpassword-alert" class="alert-class"></p>
               <p class="sign-up"> 
-                    <input type="submit" id="loginUser" onclick="signUp()"/> 
-              </p>
+                    <button type="button" id="registerUser" onclick="signUp()" >Sign Up</button>
+
             </form>
         </div>    
             
@@ -78,6 +80,7 @@
           </div>
       </div>
       <script src="js/signUp.js"></script>
+      <script src="js/logout.js"></script>
     <footer>
             <p>My-Diary, Copyright &copy; 2018 </p>
      </footer>
