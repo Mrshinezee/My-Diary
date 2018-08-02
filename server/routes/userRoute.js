@@ -1,15 +1,16 @@
-import authUsersController from '../controllers/authUsersController';
-import myDiaryController from '../controllers/myDiaryController';
-import UserValidation from '../helpers/user';
+import AuthUsersController from '../controllers/authUsersController';
+import MyDiaryController from '../controllers/myDiaryController';
+import UserMiddleware from '../middleware/user';
+import userValidation from '../middleware/validate';
 
 const userRoute = (app) => {
-  app.post('/api/v1/entries', authUsersController.validToken, UserValidation.validateEntry, myDiaryController.createEntry);
-  app.get('/api/v1/entries', authUsersController.validToken, myDiaryController.getAllEntries);
-  app.get('/api/v1/entries/:entryId', authUsersController.validToken, myDiaryController.getEntryById);
-  app.put('/api/v1/entries/:entryId', authUsersController.validToken, myDiaryController.editEntry);
-  app.delete('/api/v1/entries/:entryId', authUsersController.validToken, myDiaryController.deleteEntry);
-  app.post('/api/v1/auth/signup', UserValidation.validateRegistrationEntry, authUsersController.registerUser);
-  app.post('/api/v1/auth/login', UserValidation.validateLogin, authUsersController.userLogin);
+  app.post('/api/v1/entries', UserMiddleware.validToken, userValidation.validateEntry, MyDiaryController.createEntry);
+  app.get('/api/v1/entries', UserMiddleware.validToken, MyDiaryController.getAllEntries);
+  app.get('/api/v1/entries/:entryId', UserMiddleware.validToken, userValidation.validateParam, MyDiaryController.getEntryById);
+  app.put('/api/v1/entries/:entryId', UserMiddleware.validToken, userValidation.validateParam, userValidation.validateEntry, MyDiaryController.editEntry);
+  app.delete('/api/v1/entries/:entryId', UserMiddleware.validToken, userValidation.validateParam, MyDiaryController.deleteEntry);
+  app.post('/api/v1/auth/signup', userValidation.validateRegistrationEntry, userValidation.checkExistingUser, AuthUsersController.registerUser);
+  app.post('/api/v1/auth/login', userValidation.validateLogin, AuthUsersController.userLogin);
 };
 
 export default userRoute;
