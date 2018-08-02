@@ -67,7 +67,6 @@ class MyDiaryController {
     };
     client.query(query)
       .then((editEntry) => {
-        console.log('ghj',editEntry.rowCount);
         if (editEntry.rowCount === 1) {
           return res.status(200).json({
             success: true,

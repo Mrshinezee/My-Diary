@@ -32,7 +32,7 @@ class AuthUsersController {
     const hashPassword = PasswordController.hashpassword(request.body.password);
     const { firstName, lastName, email } = request.body;
     const query = {
-      text: 'INSERT INTO users(email, password, firstName, lastName) VALUES($1, $2, $3, $4) RETURNING email, firstName, lastName ',
+      text: 'INSERT INTO users(email, password, firstName, lastName) VALUES($1, $2, $3, $4) RETURNING userid, email, firstName, lastName ',
       values: [email, hashPassword, firstName, lastName],
     };
     client.query(query)
