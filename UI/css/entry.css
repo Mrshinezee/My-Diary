@@ -95,7 +95,7 @@ textarea{
     resize: none;
     background: transparent;
 }
-   button[type="submit"] {
+    #submitEntry {
        background: #4484CE;
        width:10%;
        padding: auto;
@@ -153,7 +153,7 @@ textarea{
     font-size: 10px;
     
 }
-button[type="submit"] {
+#submitEntry {
     width:40%;
     padding: auto;
     font-size: 16px;
