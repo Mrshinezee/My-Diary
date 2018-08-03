@@ -32,7 +32,6 @@ fetch(allEntriesUrl, options)
       cell1.innerHTML = date.toLocaleDateString('en-US', options);
       cell2.innerHTML = entry[index].entrytitle;
       cell3.innerHTML = `<div class="view" onclick="getEntries.viewTableEntry(${entry[index].entryid});"></div>
-                          <div class="edit" onclick="getEntries.editTableEntry(${entry[index].entryid});"></div>
                           <div class="delete" onclick="getEntries.deleteTableEntry(${entry[index].entryid});"></div>
                           `;
     }
@@ -59,11 +58,9 @@ const deleteModal = (id) => {
     .then(response => response.json())
     .then((data) => {
       if (data.success === false) {
-        // alert(data.message);
       } else {
         closeViewModal();
         window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
-        // updateMessageModal(data);
       }
     });
 };
@@ -126,7 +123,7 @@ const submitUpdateBtn = document.createElement('button');
 const form = document.createElement('form');
 updatebody.className = 'editBody';
 updateDiv.className = 'editDiary';
-headerDiv.textContent = 'Edit Entry';
+headerDiv.textContent = 'Entry';
 headerDiv.className = 'logo_sub';
 titleDiv.className = 'form';
 entryDiv.className = 'form';
@@ -182,11 +179,9 @@ submitUpdateBtn.addEventListener('click', () => {
     .then(response => response.json())
     .then((data) => {
       if (data.success === false) {
-      // alert(data.message);
       } else {
         editModal.style.display = 'none';
         editModal.innerHTML = '';
-        // updateMessageModal(data);
       }
     });
 });
