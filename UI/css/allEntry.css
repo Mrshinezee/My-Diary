@@ -17,6 +17,11 @@ body {
     text-align: center;   
     color: #4484CE;
 }
+    #allMessage {
+    margin: auto;
+    padding: auto;
+    text-align: center;
+    }
 #entryHeader{
     margin-top: 100px;
 }
