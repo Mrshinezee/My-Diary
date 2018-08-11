@@ -153,5 +153,24 @@ const userValidation = {
       })
       .catch(error => response.status(500).json({ message: error.message }));
   },
+  getUserDetail(request, response) {
+    const { userId } = request.body;
+    client.query({ text: 'SELECT userid, email, firstName, lastName FROM users where userid = ($1) ', values: [userId] })
+      .then((user) => {
+        if (user.rowCount > 0) {
+          response.status(200).json({
+            success: true,
+            message: 'user detail found',
+            data: user.rows,
+          });
+        } else {
+          response.status(404).json({
+            success: false,
+            message: 'User not found',
+          });
+        }
+      })
+      .catch(error => response.status(500).json({ message: error.message }));
+  },
 };
 export default userValidation;
