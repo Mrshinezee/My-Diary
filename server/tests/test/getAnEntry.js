@@ -29,7 +29,7 @@ describe('TESTING GET AN ENTRY ENDPOINT', () => {
     });
     it('should list a SINGLE entry on /entries/<id> GET ', (done) => {
       chai.request(app)
-        .get('/api/v1/entries/1')
+        .get('/api/v1/entry/1')
         .set('authorization', `Bearer ${toker}`)
         .end((error, response) => {
           response.should.have.status(200);
@@ -42,7 +42,7 @@ describe('TESTING GET AN ENTRY ENDPOINT', () => {
     });
     it('should return an error message', (done) => {
       chai.request(app)
-        .get('/api/v1/entries/100')
+        .get('/api/v1/entry/100')
         .set('authorization', `Bearer ${toker}`)
         .end((error, response) => {
           response.should.have.status(404);

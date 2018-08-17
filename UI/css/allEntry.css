@@ -97,6 +97,20 @@ body {
       background: url(http://res.cloudinary.com/dowmiccxo/image/upload/v1531315940/edit.png) no-repeat;
       background-size: 100%;
    }
+   .pagination {
+     float: right;  
+     margin: 10px; 
+     padding: 10px;
+     /* display: inline-block */
+   }
+   .pagination p{
+       /* float: right; */
+       padding: 8px 16px;
+       display: inline-block;
+       text-decoration: none;
+       border: 1px solid #4484CE;
+       cursor: pointer;
+   }
    #login {
        background: white;
        border: 1px solid black;
@@ -339,4 +353,8 @@ footer {
       #proceed,.btn-back {
         margin-left: 10px;
       } 
+      .pagination {
+        margin-top: 2px; 
+        margin-bottom: 40px; 
+      }
     } 

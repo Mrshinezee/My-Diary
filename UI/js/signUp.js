@@ -5,7 +5,8 @@ const firstNameField = document.getElementById('firstname');
 const lastNameField = document.getElementById('lastname');
 const registerUser = document.getElementById('registerUser');
 const confirmpasswordAlert = document.getElementById('confirmpassword-alert');
-const url = 'https://my-diary-collins.herokuapp.com/api/v1/auth/signup';
+// const url = 'https://my-diary-collins.herokuapp.com/api/v1/auth/signup';
+const url = 'http://127.0.0.1:4500/api/v1/auth/signup';
 
 
 const validateError = (data) => {
@@ -17,18 +18,26 @@ const validateError = (data) => {
   if (firstName) {
     firstNameError.style.display = 'block';
     firstNameError.innerHTML = firstName;
+  } else {
+    firstNameError.innerHTML = '';
   }
   if (lastName) {
     lastNameError.style.display = 'block';
     lastNameError.innerHTML = lastName;
+  } else {
+    lastNameError.innerHTML = '';
   }
   if (email) {
     emailError.style.display = 'block';
     emailError.innerHTML = email;
+  } else {
+    emailError.innerHTML = '';
   }
   if (password) {
     passwordError.style.display = 'block';
     passwordError.innerHTML = password;
+  } else {
+    passwordError.innerHTML = '';
   }
 };
 
@@ -49,6 +58,8 @@ const getfetch = (content) => {
         validateInput(response);
       } else {
         localStorage.setItem('authToken', `Bearer ${response.token}`);
+        localStorage.setItem('diaryName', response.firstName);
+        document.getElementById('registerMessage').innerHTML = '';
         const roller = document.getElementById('registerSuccess');
         roller.innerHTML = 'Account created successfully...';
         setTimeout(() => {

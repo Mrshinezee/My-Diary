@@ -155,7 +155,7 @@ const userValidation = {
   },
   getUserDetail(request, response) {
     const { userId } = request.body;
-    client.query({ text: 'SELECT userid, email, firstName, lastName FROM users where userid = ($1) ', values: [userId] })
+    client.query({ text: 'SELECT users.userid, users.email, users.firstName, users.lastName FROM users where userid = ($1) ', values: [userId] })
       .then((user) => {
         if (user.rowCount > 0) {
           response.status(200).json({

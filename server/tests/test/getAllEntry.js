@@ -29,7 +29,7 @@ describe('TESTING GET ALL ENTRY ENDPOINT', () => {
     });
     it('should list ALL entry on /entries GET ', (done) => {
       chai.request(app)
-        .get('/api/v1/entries')
+        .get('/api/v1/entries/0')
         .set('authorization', `Bearer ${toker}`)
         .end((error, response) => {
           response.should.have.status(200);
