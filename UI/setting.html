@@ -27,9 +27,9 @@
           
                 <input type="checkbox" id="menu-check">
                 <div class="menu-links-right">
-                  <a href="entry.html"><i class="fa fa-plus"></i>Create Entry</a>
-                  <a href="allEntry.html"><i class="fa fa-book"></i>Entries</a>
-                  <a href="index.html"><i class="fa fa-sign-out"></i>Logout</a>
+                  <a href="entry.html"><i class="fa fa-plus"></i> Create Entry</a>
+                  <a href="allEntry.html"><i class="fa fa-book"></i> Entries</a>
+                  <a onclick="logout();"><i class="fa fa-sign-out"></i> Logout</a>
                 </div>      
               </div>
 
@@ -43,7 +43,7 @@
                    </p>
                    <div id="counter">
                            <h2>10 Entries</h2>
-                           <p >since registration.</p>
+                           <p >Created</p>
 
                    </div>
                     
@@ -64,23 +64,23 @@
                       
                       <p>
                               <span><label for="email">Email</label></span>
-                              <input type="email" id="email" name="email"  value="shinezee@gmail.com" >
+                              <input type="email" id="email" name="email"   readonly>
                       </p>
                       <p>
                            <span><label for="firstname">Firstname</label></span>
-                           <input type="text" id="firstname" name="firstname"  value="Shine" >
+                           <input type="text" id="firstname" name="firstname"  readonly>
                       </p>
                       <p>
                            <span><label for="lastname">Lastname</label></span>
-                           <input type="text" id="lastname" name="lastname"  value="Zee" >
+                           <input type="text" id="lastname" name="lastname"  readonly >
                       </p>
-                      <button type="submit" name="save" id="updateAccount">Update</button>
                     </form>
                   </div>
                </div>
             </div>    
         </div>    
-            
+        <script src="js/setting.js"></script> 
+        <script src="js/logout.js"></script>   
     <footer>
             <p>My-Diary, Copyright &copy; 2018 </p>
      </footer>

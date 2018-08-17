@@ -1,12 +1,15 @@
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
-const url = 'https://my-diary-collins.herokuapp.com/api/v1/auth/login';
+// const url = 'https://my-diary-collins.herokuapp.com/api/v1/auth/login';
+const url = 'http://127.0.0.1:4500/api/v1/auth/login';
 
 const validateErrorMessage = (data) => {
+  const loginMessage = document.getElementById('loginMessage');
   if (data.message) {
-    const loginMessage = document.getElementById('loginMessage');
     loginMessage.style.display = 'block';
     loginMessage.innerHTML = data.message;
+  } else {
+    loginMessage.innerHTML = '';
   }
 };
 const validateErrorField = (data) => {
@@ -16,19 +19,26 @@ const validateErrorField = (data) => {
   if (email) {
     emailError.style.display = 'block';
     emailError.innerHTML = email;
+  } else {
+    emailError.innerHTML = '';
   }
   if (password) {
     passwordError.style.display = 'block';
     passwordError.innerHTML = password;
+  } else {
+    passwordError.innerHTML = '';
   }
 };
 
 const successLogin = (response) => {
   localStorage.setItem('authToken', `Bearer ${response.token}`);
+  localStorage.setItem('diaryName', response.firstName);
+  document.getElementById('loginMessage').innerHTML = '';
   const roller = document.getElementById('loginSuccess');
   roller.innerHTML = 'Login was successful...';
   setTimeout(() => {
-    window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
+    // window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
+    window.location.href = 'http://127.0.0.1:4500/allEntry.html';
   }, 3000);
 };
 
@@ -47,6 +57,7 @@ const login = () => {
   fetch(url, content)
     .then(data => data.json())
     .then((response) => {
+      console.log(response);
       if (response.success === false) {
         validateErrorMessage(response);
         validateErrorField(response);

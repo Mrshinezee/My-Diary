@@ -19,14 +19,16 @@ class MyDiaryController {
   }
 
   getAllEntries(req, res) {
+    const offset = parseInt(req.params.offSet, 10);
     const { userId } = req.body;
-    client.query('SELECT * FROM entries where userid = $1', [userId])
+    client.query('SELECT * , count(*) OVER() AS full_count FROM entries where userid = $1 LIMIT 5 OFFSET $2 ', [userId, offset])
       .then((entry) => {
         if (entry.rowCount >= 1) {
           res.status(200).json({
             success: true,
             message: 'entries successfully retrieved',
             entry: entry.rows,
+            count: entry.rows[0].full_count,
           });
         }
         res.status(404).json({

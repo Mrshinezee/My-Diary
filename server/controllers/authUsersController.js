@@ -14,6 +14,7 @@ class AuthUsersController {
           jwt.sign({ user: user.rows[0].userid }, 'secretKey', (err, token) => response.json({
             success: true,
             message: 'user successfully login',
+            firstName: user.rows[0].firstname,
             user: user.rows,
             token,
           }))
@@ -38,7 +39,8 @@ class AuthUsersController {
     client.query(query)
     .then(data => jwt.sign({ user: data.rows[0].userid }, 'secretKey', (err, token) => response.status(201).json({
       success: true,
-      message: `Welcome ${firstName}`,
+      message: 'user registration was successful',
+      firstName: data.rows[0].firstname,
       data: data.rows[0],
       token,
     })))

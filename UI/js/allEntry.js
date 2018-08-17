@@ -1,8 +1,12 @@
 const token = localStorage.getItem('authToken');
 if (!token) {
-  window.location.href = 'https://my-diary-collins.herokuapp.com/index.html';
+  // window.location.href = 'https://my-diary-collins.herokuapp.com/index.html';
+  window.location.href = 'http://127.0.0.1:4500/index.html';
 }
-
+const diaryName = localStorage.getItem('diaryName');
+document.getElementById('diaryName').innerHTML = diaryName;
+const table = document.getElementById('entriesTable');
+const pagination = document.getElementById('pg');
 const options = {
   method: 'GET',
   headers: {
@@ -10,33 +14,67 @@ const options = {
     Authorization: token,
   },
 };
-const allEntriesUrl = 'https://my-diary-collins.herokuapp.com/api/v1/entries/';
+// const allEntriesUrl = 'https://my-diary-collins.herokuapp.com/api/v1/entries/';
+// const singleEntryUrl = 'https://my-diary-collins.herokuapp.com/api/v1/entry/';
+const allEntriesUrl = 'http://127.0.0.1:4500/api/v1/entries/';
+const singleEntryUrl = 'http://127.0.0.1:4500/api/v1/entry/';
 
-fetch(allEntriesUrl, options)
-  .then(response => response.json())
-  .then((data) => {
-    const { message, entry } = data;
-    const entryMessage = document.getElementById('allMessage');
-    entryMessage.innerHTML = message;
+const loadTable = (message, entry) => {
+  const entryMessage = document.getElementById('allMessage');
+  entryMessage.innerHTML = message;
+  for (let index = 0; index < entry.length; index += 1) {
+    const row = table.insertRow(index + 1);
+    const cell1 = row.insertCell(0);
+    cell1.setAttribute('name', 'Date');
+    const cell2 = row.insertCell(1);
+    cell2.setAttribute('name', 'Title');
+    const cell3 = row.insertCell(2);
+    cell3.setAttribute('name', 'Action');
+    const date = new Date(entry[index].entrydate);
+    cell1.innerHTML = date.toLocaleDateString('en-US', options);
+    cell2.innerHTML = entry[index].entrytitle;
+    cell3.innerHTML = `<div class="view" onclick="getEntries.viewTableEntry(${entry[index].entryid});"></div>
+                        <div class="delete" onclick="getEntries.deleteTableEntry(${entry[index].entryid});"></div>
+                        `;
+  }
+};
 
-    const table = document.getElementById('entriesTable');
-    for (let index = 0; index < entry.length; index += 1) {
-      const row = table.insertRow(index + 1);
-      const cell1 = row.insertCell(0);
-      cell1.setAttribute('name', 'Date');
-      const cell2 = row.insertCell(1);
-      cell2.setAttribute('name', 'Title');
-      const cell3 = row.insertCell(2);
-      cell3.setAttribute('name', 'Action');
-      const date = new Date(entry[index].entrydate);
-      cell1.innerHTML = date.toLocaleDateString('en-US', options);
-      cell2.innerHTML = entry[index].entrytitle;
-      cell3.innerHTML = `<div class="view" onclick="getEntries.viewTableEntry(${entry[index].entryid});"></div>
-                          <div class="delete" onclick="getEntries.deleteTableEntry(${entry[index].entryid});"></div>
-                          `;
+const loadPagination = (count) => {
+  const pages = Math.ceil(count / 5);
+  for (let p = 1; p <= pages; p += 1) {
+    const newlink = document.createElement('p');
+    newlink.innerHTML += p;
+    newlink.setAttribute('onclick', `showOffset(${p})`);
+    pagination.appendChild(newlink);
+    if (p === 1) {
+      pagination.style.display = 'none';
+    } else {
+      pagination.style.display = 'block';
     }
-  });
+  }
+};
 
+const loadPage = (offset = 0) => {
+  fetch(allEntriesUrl + offset, options)
+    .then(response => response.json())
+    .then((data) => {
+      const { message, entry, count } = data;
+      loadTable(message, entry);
+      pagination.innerHTML = '';
+      loadPagination(count);
+    });
+};
+const showOffset = (p) => {
+  const offset = (p - 1) * (5);
+  for (let i = table.rows.length - 1; i > 0; i--) {
+    table.deleteRow(i);
+  }
+  loadPage(offset);
+};
+
+window.onload = () => {
+  loadPage(0);
+};
 
 const modalHeaderHtml = '<div class="logo_sub" >DELETE</div>';
 const modalContentHtml = '<p style="text-align: center;"> Entry will be removed permanetly</p>';
@@ -60,7 +98,8 @@ const deleteModal = (id) => {
       if (data.success === false) {
       } else {
         closeViewModal();
-        window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
+        // window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
+        window.location.href = 'http://127.0.0.1:4500/allEntry.html';
       }
     });
 };
@@ -95,7 +134,7 @@ const getEntries = {
     updateModal();
   },
   viewTableEntry: (id) => {
-    fetch(allEntriesUrl + id, options)
+    fetch(singleEntryUrl + id, options)
       .then(response => response.json())
       .then((json) => {
         const { message, entry } = json;
