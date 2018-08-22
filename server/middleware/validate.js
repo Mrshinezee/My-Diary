@@ -155,7 +155,7 @@ const userValidation = {
   },
   getUserDetail(request, response) {
     const { userId } = request.body;
-    client.query({ text: 'SELECT users.userid, users.email, users.firstName, users.lastName FROM users where userid = ($1) ', values: [userId] })
+    client.query({ text: 'SELECT count(*) AS full_count, u.firstname, u.lastname, u.email FROM entries AS e JOIN users AS u ON e.userid = u.userid where e.userid = ($1) GROUP BY 2, 3, 4', values: [userId] })
       .then((user) => {
         if (user.rowCount > 0) {
           response.status(200).json({
