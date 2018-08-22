@@ -1,7 +1,7 @@
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
-// const url = 'https://my-diary-collins.herokuapp.com/api/v1/auth/login';
-const url = 'http://127.0.0.1:4500/api/v1/auth/login';
+const url = 'https://my-diary-collins.herokuapp.com/api/v1/auth/login';
+// const url = 'http://127.0.0.1:4500/api/v1/auth/login';
 
 const validateErrorMessage = (data) => {
   const loginMessage = document.getElementById('loginMessage');
