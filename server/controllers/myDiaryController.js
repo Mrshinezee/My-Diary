@@ -19,9 +19,10 @@ class MyDiaryController {
   }
 
   getAllEntries(req, res) {
-    const offset = parseInt(req.params.offSet, 10);
+    // const offset = parseInt(req.params.offSet, 10);
     const { userId } = req.body;
-    client.query('SELECT * , count(*) OVER() AS full_count FROM entries where userid = $1 LIMIT 5 OFFSET $2 ', [userId, offset])
+    // client.query('SELECT * , count(*) OVER() AS full_count FROM entries where userid = $1 LIMIT 5 OFFSET $2 ', [userId, offset])
+    client.query('SELECT * , count(*) OVER() AS full_count FROM entries where userid = $1', [userId])
       .then((entry) => {
         if (entry.rowCount >= 1) {
           res.status(200).json({
@@ -40,7 +41,7 @@ class MyDiaryController {
   }
 
 
-  getEntryById(req, res) {
+  getEntryById(req, res){
     const entryId = parseInt(req.params.entryId, 10);
     const { userId } = req.body;
     client.query({ text: 'SELECT * FROM entries where entryId = $1 and userId = $2 ', values: [entryId, userId] })

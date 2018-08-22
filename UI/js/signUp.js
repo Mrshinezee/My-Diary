@@ -63,7 +63,8 @@ const getfetch = (content) => {
         const roller = document.getElementById('registerSuccess');
         roller.innerHTML = 'Account created successfully...';
         setTimeout(() => {
-          window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
+          // window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
+          window.location.href = 'http://127.0.0.1:4500/allEntry.html';
         }, 3000);
       }
     });

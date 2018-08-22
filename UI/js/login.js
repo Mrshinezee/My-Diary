@@ -37,8 +37,8 @@ const successLogin = (response) => {
   const roller = document.getElementById('loginSuccess');
   roller.innerHTML = 'Login was successful...';
   setTimeout(() => {
-    window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
-    // window.location.href = 'http://127.0.0.1:4500/allEntry.html';
+    // window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
+    window.location.href = 'http://127.0.0.1:4500/allEntry.html';
   }, 3000);
 };
 

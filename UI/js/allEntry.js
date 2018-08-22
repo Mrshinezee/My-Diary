@@ -1,7 +1,7 @@
 const token = localStorage.getItem('authToken');
 if (!token) {
-  window.location.href = 'https://my-diary-collins.herokuapp.com/index.html';
-  // window.location.href = 'http://127.0.0.1:4500/index.html';
+  // window.location.href = 'https://my-diary-collins.herokuapp.com/index.html';
+  window.location.href = 'http://127.0.0.1:4500/index.html';
 }
 const diaryName = localStorage.getItem('diaryName');
 document.getElementById('diaryName').innerHTML = diaryName;
@@ -14,10 +14,10 @@ const options = {
     Authorization: token,
   },
 };
-const allEntriesUrl = 'https://my-diary-collins.herokuapp.com/api/v1/entries/';
-const singleEntryUrl = 'https://my-diary-collins.herokuapp.com/api/v1/entry/';
-// const allEntriesUrl = 'http://127.0.0.1:4500/api/v1/entries/';
-// const singleEntryUrl = 'http://127.0.0.1:4500/api/v1/entry/';
+// const allEntriesUrl = 'https://my-diary-collins.herokuapp.com/api/v1/entries/';
+// const singleEntryUrl = 'https://my-diary-collins.herokuapp.com/api/v1/entry/';
+const allEntriesUrl = 'http://127.0.0.1:4500/api/v1/entries/';
+const singleEntryUrl = 'http://127.0.0.1:4500/api/v1/entry/';
 
 const loadTable = (message, entry) => {
   const entryMessage = document.getElementById('allMessage');
@@ -98,8 +98,8 @@ const deleteModal = (id) => {
       if (data.success === false) {
       } else {
         closeViewModal();
-        window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
-        // window.location.href = 'http://127.0.0.1:4500/allEntry.html';
+        // window.location.href = 'https://my-diary-collins.herokuapp.com/allEntry.html';
+        window.location.href = 'http://127.0.0.1:4500/allEntry.html';
       }
     });
 };
