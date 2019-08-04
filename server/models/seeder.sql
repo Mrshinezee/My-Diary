@@ -20,3 +20,17 @@ CREATE TABLE entries (
  entryDate date NOT NULL DEFAULT CURRENT_DATE,
  FOREIGN KEY (userId) REFERENCES users (userId)
 );
+
+DROP TABLE IF EXISTS transactions;
+CREATE TABLE transactions (
+ transId serial PRIMARY KEY,
+ userId INT NOT NULL,
+ coin VARCHAR (255) NOT NULL,
+ type INT NOT NULL,
+ price  float NOT NULL,
+ quantity float NOT NULL,
+ note VARCHAR (255),
+ transDate DATE NOT NULL DEFAULT CURRENT_DATE,
+ transTime TIME NOT NULL DEFAULT CURRENT_TIME,
+ FOREIGN KEY (userId) REFERENCES users (userId)
+);
