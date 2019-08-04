@@ -26,6 +26,54 @@ const userValidation = {
       errors,
     });
   },
+  validatePurchase(request, response, next) {
+    const { coin, type, price, quantity, date, time } = request.body;
+    let isValid = true;
+    const errors = {};
+    if (!coin || !coin.trim()) {
+      isValid = false;
+      errors.coin = 'Cryptocurrency name is required';
+    } else {
+      request.body.coin = coin.trim();
+    }
+    if (!type || !type.trim()) {
+      isValid = false;
+      errors.type = 'Purchase type could be 1-buy 2-sell 3-transfer must be provided';
+    } else {
+      request.body.type = type.trim();
+    }
+    if (!price || !price.trim()) {
+      isValid = false;
+      errors.price = 'Cryptocurrency price is required';
+    } else {
+      request.body.price = price.trim();
+    }
+    if (!quantity || !quantity.trim()) {
+      isValid = false;
+      errors.quantity = 'quantity is required';
+    } else {
+      request.body.quantity = quantity.trim();
+    }
+    if (!date || !date.trim()) {
+      isValid = false;
+      errors.date = 'purchase date is required';
+    } else {
+      request.body.date = date.trim();
+    }
+    if (!time || !time.trim()) {
+      isValid = false;
+      errors.time = 'purchase date is required';
+    } else {
+      request.body.time = time.trim();
+    }
+    if (isValid) {
+      return next();
+    }
+    return response.status(400).json({
+      success: false,
+      errors,
+    });
+  },
   validateLogin(request, response, next) {
     const required = ['email', 'password'];
     const collection = request.body;
