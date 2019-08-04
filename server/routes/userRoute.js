@@ -3,6 +3,7 @@ import MyDiaryController from '../controllers/myDiaryController';
 import CoinController from '../controllers/coinController';
 import UserMiddleware from '../middleware/user';
 import userValidation from '../middleware/validate';
+import TransactionController from '../controllers/transactionController';
 
 const userRoute = (app) => {
   app.post('/api/v1/entries', UserMiddleware.validToken, userValidation.validateEntry, MyDiaryController.createEntry);
@@ -15,6 +16,8 @@ const userRoute = (app) => {
   app.delete('/api/v1/entries/:entryId', UserMiddleware.validToken, userValidation.validateParam, MyDiaryController.deleteEntry);
   app.post('/api/v1/auth/signup', userValidation.validateRegistrationEntry, userValidation.checkExistingUser, AuthUsersController.registerUser);
   app.post('/api/v1/auth/login', userValidation.validateLogin, AuthUsersController.userLogin);
+  app.post('/api/v1/purchase', UserMiddleware.validToken, userValidation.validatePurchase, TransactionController.createTransaction);
+  app.get('/api/v1/purchase/:date', UserMiddleware.validToken, TransactionController.getTransactionByDate);
 };
 
 export default userRoute;
